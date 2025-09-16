@@ -17,7 +17,7 @@ const services = [
   },
   {
     icon: "🎓",
-    title: "Feste di Laurea", 
+    title: "Feste di Laurea",
     description: "Celebra il tuo traguardo con stile"
   },
   {
@@ -68,15 +68,15 @@ function ContactModal({ isOpen, onClose }) {
               <h2 className="text-2xl font-bold">Richiedi Preventivo</h2>
               <p className="opacity-90 mt-1">Ti contatteremo entro 24 ore ⚡</p>
             </div>
-            <button 
-              onClick={onClose} 
+            <button
+              onClick={onClose}
               className="text-white/80 hover:text-white text-3xl hover:bg-white/20 w-10 h-10 rounded-full transition-all"
             >
               ✕
             </button>
           </div>
         </div>
-        
+
         <div className="p-8 space-y-6">
           {/* Nome */}
           <div className="space-y-2">
@@ -93,7 +93,7 @@ function ContactModal({ isOpen, onClose }) {
               required
             />
           </div>
-          
+
           {/* Email */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -109,7 +109,7 @@ function ContactModal({ isOpen, onClose }) {
               required
             />
           </div>
-          
+
           {/* Telefono */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -124,7 +124,7 @@ function ContactModal({ isOpen, onClose }) {
               className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-gray-50 hover:bg-white text-gray-800 placeholder-gray-400"
             />
           </div>
-          
+
           {/* Select Tipo Evento - MIGLIORATO */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -145,7 +145,7 @@ function ContactModal({ isOpen, onClose }) {
               <option value="altro" className="py-2">🎉 Altro</option>
             </select>
           </div>
-          
+
           {/* Messaggio */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -164,9 +164,9 @@ function ContactModal({ isOpen, onClose }) {
           {/* Privacy */}
           <div className="bg-gradient-to-r from-pink-50 to-purple-50 p-4 rounded-xl border border-pink-100">
             <label className="flex items-start gap-3 text-sm text-gray-600 cursor-pointer">
-              <input 
-                type="checkbox" 
-                required 
+              <input
+                type="checkbox"
+                required
                 className="mt-1 w-4 h-4 text-pink-600 border-2 border-gray-300 rounded focus:ring-pink-500 focus:ring-2"
               />
               <span>
@@ -175,7 +175,7 @@ function ContactModal({ isOpen, onClose }) {
               </span>
             </label>
           </div>
-          
+
           {/* Buttons Migliorati */}
           <div className="flex gap-4 pt-4">
             <button
@@ -217,13 +217,13 @@ function Chatbot() {
             Sono l'assistente di Fast Events. Contattaci per informazioni sui nostri servizi!
           </p>
           <div className="space-y-2">
-            <button 
+            <button
               onClick={() => window.open('https://wa.me/3892574273?text=Ciao, vorrei informazioni sui matrimoni', '_blank')}
               className="block w-full text-left p-2 bg-green-50 rounded hover:bg-green-100 text-sm"
             >
               💒 Info Matrimoni
             </button>
-            <button 
+            <button
               onClick={() => window.open('https://wa.me/3892574273?text=Ciao, vorrei informazioni sulle feste di laurea', '_blank')}
               className="block w-full text-left p-2 bg-blue-50 rounded hover:bg-blue-100 text-sm"
             >
@@ -270,8 +270,8 @@ export default function Home() {
       {/* HERO BANNER (il tuo codice esistente) */}
       <section className="relative h-[90vh] w-full overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-between p-4 z-20">
-          <button 
-            onClick={prevSlide} 
+          <button
+            onClick={prevSlide}
             className="bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition text-xl"
           >
             ◀
@@ -288,9 +288,8 @@ export default function Home() {
           {images.map((src, index) => (
             <div
               key={index}
-              className={`absolute top-0 left-0 h-full w-full transition-opacity duration-800 ${
-                index === current ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute top-0 left-0 h-full w-full transition-opacity duration-800 ${index === current ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               <Image
                 src={src}
@@ -332,9 +331,8 @@ export default function Home() {
             <button
               key={index}
               onClick={() => setCurrent(index)}
-              className={`w-3 h-3 rounded-full transition ${
-                index === current ? 'bg-white' : 'bg-white/50 hover:bg-white/75'
-              }`}
+              className={`w-3 h-3 rounded-full transition ${index === current ? 'bg-white' : 'bg-white/50 hover:bg-white/75'
+                }`}
             />
           ))}
         </div>
@@ -374,12 +372,12 @@ export default function Home() {
         </h2>
         <div className="max-w-4xl mx-auto">
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
-            Siamo un'agenzia di organizzazione eventi dedicata a trasformare i tuoi momenti speciali in ricordi indimenticabili. 
+            Siamo un'agenzia di organizzazione eventi dedicata a trasformare i tuoi momenti speciali in ricordi indimenticabili.
             Con anni di esperienza nel settore, il nostro team di esperti si impegna a curare ogni dettaglio.
           </p>
           <p className="text-gray-600 text-lg leading-relaxed mb-8">
-            Che tu stia pianificando un matrimonio da sogno, una festa di laurea memorabile, un compleanno speciale 
-            o un evento aziendale di successo, siamo qui per aiutarti a realizzare la tua visione con creatività, 
+            Che tu stia pianificando un matrimonio da sogno, una festa di laurea memorabile, un compleanno speciale
+            o un evento aziendale di successo, siamo qui per aiutarti a realizzare la tua visione con creatività,
             professionalità e passione.
           </p>
           <button
@@ -399,7 +397,7 @@ export default function Home() {
         <p className="text-xl mb-8 max-w-2xl mx-auto">
           Contattaci oggi per una consulenza gratuita
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={openWhatsApp}
@@ -407,7 +405,7 @@ export default function Home() {
           >
             📱 WhatsApp: +39 3892574273
           </button>
-          
+
           <button
             onClick={() => setShowModal(true)}
             className="border-2 border-white hover:bg-white hover:text-pink-600 px-6 py-3 rounded-full font-semibold transition inline-flex items-center justify-center gap-2"
