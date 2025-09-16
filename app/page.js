@@ -171,7 +171,7 @@ export default function Home() {
             >
               Matrimoni da sogno, feste di laurea memorabili, compleanni indimenticabili ed eventi aziendali di successo.
               <span className="block mt-2 text-pink-300">
-                Ci occupiamo di tutto, tu pensa solo a goderti l'attimo ✨
+                Ci occupiamo di tutto, tu pensa solo a goderti l&apos;attimo ✨
               </span>
             </motion.p>
             
@@ -323,7 +323,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <p className="text-xl mb-6">
-                Siamo un'agenzia di organizzazione eventi dedicata a trasformare i tuoi momenti speciali in 
+                Siamo un&apos;agenzia di organizzazione eventi dedicata a trasformare i tuoi momenti speciali in 
                 <strong className="text-pink-600"> ricordi indimenticabili</strong>. 
                 Con anni di esperienza nel settore, il nostro team di esperti si impegna a curare ogni dettaglio.
               </p>
@@ -390,7 +390,7 @@ export default function Home() {
                 </div>
                 
                 <blockquote className="text-gray-700 mb-6 italic">
-                  "{testimonial.text}"
+                  &#34;{testimonial.text}&#34;
                 </blockquote>
                 
                 <div>
