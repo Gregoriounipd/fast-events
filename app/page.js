@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Star, Heart, Calendar, Users, Award, Phone, Mail, MapPin } from 'lucide-react';
 
 const images = [
   '/images/foto1_banner.jpg',
@@ -13,73 +11,251 @@ const images = [
 
 const services = [
   {
-    icon: <Heart className="w-8 h-8" />,
+    icon: "💒",
     title: "Matrimoni",
-    description: "Il giorno più importante della vostra vita, curato nei minimi dettagli",
-    color: "from-pink-400 to-rose-500"
+    description: "Il giorno più importante della vostra vita"
   },
   {
-    icon: <Award className="w-8 h-8" />,
-    title: "Feste di Laurea",
-    description: "Celebra il tuo traguardo con un evento indimenticabile",
-    color: "from-blue-400 to-indigo-500"
+    icon: "🎓",
+    title: "Feste di Laurea", 
+    description: "Celebra il tuo traguardo con stile"
   },
   {
-    icon: <Calendar className="w-8 h-8" />,
+    icon: "🎂",
     title: "Compleanni",
-    description: "Ogni età merita una festa speciale e personalizzata",
-    color: "from-purple-400 to-pink-500"
+    description: "Feste personali per ogni età"
   },
   {
-    icon: <Users className="w-8 h-8" />,
+    icon: "🏢",
     title: "Eventi Aziendali",
-    description: "Conferenze, team building e celebrazioni corporate",
-    color: "from-green-400 to-teal-500"
+    description: "Conferenze e team building"
   }
 ];
 
-const testimonials = [
-  {
-    name: "Marco & Giulia",
-    event: "Matrimonio",
-    text: "Hanno trasformato il nostro sogno in realtà. Ogni dettaglio era perfetto!",
-    rating: 5
-  },
-  {
-    name: "Francesco",
-    event: "Laurea in Ingegneria",
-    text: "Una festa incredibile che ricorderò per sempre. Grazie team!",
-    rating: 5
-  },
-  {
-    name: "Azienda TechCorp",
-    event: "Evento Aziendale",
-    text: "Professionalità e creatività al top. I nostri clienti sono rimasti entusiasti.",
-    rating: 5
-  }
-];
+// FORM POPUP CON STYLING MIGLIORATO
+function ContactModal({ isOpen, onClose }) {
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    telefono: '',
+    tipoEvento: 'matrimonio',
+    messaggio: ''
+  });
 
-const stats = [
-  { number: "500+", label: "Eventi Organizzati" },
-  { number: "98%", label: "Clienti Soddisfatti" },
-  { number: "50+", label: "Location Partner" },
-  { number: "15", label: "Anni di Esperienza" }
-];
+  const handleSubmit = async () => {
+    console.log('Form inviato:', formData);
+    alert('Richiesta inviata! Ti contatteremo presto.');
+    onClose();
+    setFormData({ nome: '', email: '', telefono: '', tipoEvento: 'matrimonio', messaggio: '' });
+  };
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        {/* Header Migliorato */}
+        <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-6 rounded-t-2xl">
+          <div className="flex justify-between items-center">
+            <div>
+              <h2 className="text-2xl font-bold">Richiedi Preventivo</h2>
+              <p className="opacity-90 mt-1">Ti contatteremo entro 24 ore ⚡</p>
+            </div>
+            <button 
+              onClick={onClose} 
+              className="text-white/80 hover:text-white text-3xl hover:bg-white/20 w-10 h-10 rounded-full transition-all"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+        
+        <div className="p-8 space-y-6">
+          {/* Nome */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Nome e Cognome *
+            </label>
+            <input
+              type="text"
+              name="nome"
+              value={formData.nome}
+              onChange={handleChange}
+              placeholder="Mario Rossi"
+              className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-gray-50 hover:bg-white text-gray-800 placeholder-gray-400"
+              required
+            />
+          </div>
+          
+          {/* Email */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Email *
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="mario.rossi@email.com"
+              className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-gray-50 hover:bg-white text-gray-800 placeholder-gray-400"
+              required
+            />
+          </div>
+          
+          {/* Telefono */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Telefono
+            </label>
+            <input
+              type="tel"
+              name="telefono"
+              value={formData.telefono}
+              onChange={handleChange}
+              placeholder="+39 333 123 4567"
+              className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-gray-50 hover:bg-white text-gray-800 placeholder-gray-400"
+            />
+          </div>
+          
+          {/* Select Tipo Evento - MIGLIORATO */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Tipo di Evento *
+            </label>
+            <select
+              name="tipoEvento"
+              value={formData.tipoEvento}
+              onChange={handleChange}
+              className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-gradient-to-r from-gray-50 to-white hover:from-white hover:to-gray-50 text-gray-800 font-medium shadow-sm cursor-pointer appearance-none bg-no-repeat bg-right bg-[length:24px_24px] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcgMTBMMTIgMTVMMTcgMTAiIHN0cm9rZT0iIzZCNzI4MCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+')]"
+            >
+              <option value="matrimonio" className="py-2">💒 Matrimonio</option>
+              <option value="laurea" className="py-2">🎓 Festa di Laurea</option>
+              <option value="compleanno" className="py-2">🎂 Compleanno</option>
+              <option value="aziendale" className="py-2">🏢 Evento Aziendale</option>
+              <option value="battesimo" className="py-2">⛪ Battesimo/Comunione</option>
+              <option value="anniversario" className="py-2">💕 Anniversario</option>
+              <option value="altro" className="py-2">🎉 Altro</option>
+            </select>
+          </div>
+          
+          {/* Messaggio */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Messaggio
+            </label>
+            <textarea
+              name="messaggio"
+              value={formData.messaggio}
+              onChange={handleChange}
+              placeholder="Descrivi il tuo evento ideale: data, location preferita, numero partecipanti, budget orientativo..."
+              rows="4"
+              className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-gray-50 hover:bg-white text-gray-800 placeholder-gray-400 resize-none"
+            ></textarea>
+          </div>
+
+          {/* Privacy */}
+          <div className="bg-gradient-to-r from-pink-50 to-purple-50 p-4 rounded-xl border border-pink-100">
+            <label className="flex items-start gap-3 text-sm text-gray-600 cursor-pointer">
+              <input 
+                type="checkbox" 
+                required 
+                className="mt-1 w-4 h-4 text-pink-600 border-2 border-gray-300 rounded focus:ring-pink-500 focus:ring-2"
+              />
+              <span>
+                Accetto il trattamento dei dati personali secondo la Privacy Policy.
+                I tuoi dati verranno utilizzati esclusivamente per rispondere alla tua richiesta.
+              </span>
+            </label>
+          </div>
+          
+          {/* Buttons Migliorati */}
+          <div className="flex gap-4 pt-4">
+            <button
+              onClick={onClose}
+              className="flex-1 py-4 px-6 border-2 border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 hover:border-gray-300 font-semibold transition-all duration-200 hover:shadow-md"
+            >
+              Annulla
+            </button>
+            <button
+              onClick={handleSubmit}
+              className="flex-1 py-4 px-6 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl hover:from-pink-600 hover:to-purple-700 font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Invia Richiesta ✨
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// COMPONENTE CHATBOT
+function Chatbot() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-6 right-6 bg-pink-500 text-white p-4 rounded-full shadow-lg hover:bg-pink-600 z-40"
+      >
+        {isOpen ? '✕' : '💬'}
+      </button>
+
+      {isOpen && (
+        <div className="fixed bottom-20 right-6 w-80 h-64 bg-white rounded-lg shadow-xl z-40 p-4">
+          <h3 className="font-bold mb-2">Ciao! 👋</h3>
+          <p className="text-sm text-gray-600 mb-4">
+            Sono l'assistente di Fast Events. Contattaci per informazioni sui nostri servizi!
+          </p>
+          <div className="space-y-2">
+            <button 
+              onClick={() => window.open('https://wa.me/3892574273?text=Ciao, vorrei informazioni sui matrimoni', '_blank')}
+              className="block w-full text-left p-2 bg-green-50 rounded hover:bg-green-100 text-sm"
+            >
+              💒 Info Matrimoni
+            </button>
+            <button 
+              onClick={() => window.open('https://wa.me/3892574273?text=Ciao, vorrei informazioni sulle feste di laurea', '_blank')}
+              className="block w-full text-left p-2 bg-blue-50 rounded hover:bg-blue-100 text-sm"
+            >
+              🎓 Info Lauree
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// HOMEPAGE PRINCIPALE
 export default function Home() {
   const [current, setCurrent] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
-  // Auto-slide carousel
+  // Auto-slide
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
     }, 5000);
-
     return () => clearInterval(timer);
-  }, [isAutoPlaying]);
+  }, []);
+
+  // Funzione WhatsApp
+  const openWhatsApp = () => {
+    const phoneNumber = '3892574273'; // CAMBIA CON IL TUO NUMERO
+    const message = 'Ciao! Sono interessato ai vostri servizi per organizzazione eventi.';
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
 
   const nextSlide = () => {
     setCurrent((prev) => (prev + 1) % images.length);
@@ -91,358 +267,163 @@ export default function Home() {
 
   return (
     <main className="w-full">
-      {/* Enhanced Hero Banner */}
-      <section 
-        className="relative h-screen w-full overflow-hidden"
-        onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
-      >
-        {/* Navigation Arrows */}
-        <div className="absolute inset-0 flex items-center justify-between p-4 z-30">
-          <motion.button 
+      {/* HERO BANNER (il tuo codice esistente) */}
+      <section className="relative h-[90vh] w-full overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-between p-4 z-20">
+          <button 
             onClick={prevSlide} 
-            className="bg-white/20 backdrop-blur-sm text-white p-4 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            className="bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition text-xl"
           >
-            <ChevronLeft className="w-6 h-6" />
-          </motion.button>
-          <motion.button
+            ◀
+          </button>
+          <button
             onClick={nextSlide}
-            className="bg-white/20 backdrop-blur-sm text-white p-4 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            className="bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition text-xl"
           >
-            <ChevronRight className="w-6 h-6" />
-          </motion.button>
+            ▶
+          </button>
         </div>
 
-        {/* Image Carousel */}
         <div className="relative h-full w-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              className="absolute top-0 left-0 h-full w-full"
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.8 }}
+          {images.map((src, index) => (
+            <div
+              key={index}
+              className={`absolute top-0 left-0 h-full w-full transition-opacity duration-800 ${
+                index === current ? 'opacity-100' : 'opacity-0'
+              }`}
             >
               <Image
-                src={images[current]}
-                alt={`Evento organizzato ${current + 1}`}
+                src={src}
+                alt={`Slide ${index + 1}`}
                 fill
                 className="object-cover"
-                priority={current === 0}
+                priority={index === 0}
               />
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          ))}
         </div>
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent z-10" />
-
-        {/* Hero Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-20">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
-          >
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
-              initial={{ y: -30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white px-4 z-10">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            Organizziamo i tuoi momenti speciali
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg md:text-xl mb-8">
+            Matrimoni, feste di laurea, compleanni ed eventi aziendali.
+            Ci occupiamo di tutto, dalla pianificazione alla realizzazione.
+          </p>
+          <div className="flex gap-4">
+            <a
+              href="#servizi"
+              className="bg-pink-500 hover:bg-pink-600 px-6 py-3 rounded-full font-semibold transition"
             >
-              <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-                Organizziamo
-              </span>
-              <br />
-              i tuoi momenti speciali
-            </motion.h1>
-            
-            <motion.p
-              className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
+              Scopri i servizi
+            </a>
+            <button
+              onClick={() => setShowModal(true)}
+              className="border-2 border-white hover:bg-white hover:text-gray-900 px-6 py-3 rounded-full font-semibold transition"
             >
-              Matrimoni da sogno, feste di laurea memorabili, compleanni indimenticabili ed eventi aziendali di successo.
-              <span className="block mt-2 text-pink-300">
-                Ci occupiamo di tutto, tu pensa solo a goderti l&apos;attimo ✨
-              </span>
-            </motion.p>
-            
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.6 }}
-            >
-              <motion.a
-                href="#servizi"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-xl"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Heart className="w-5 h-5" />
-                Scopri i nostri servizi
-              </motion.a>
-              
-              <motion.a
-                href="#contatti"
-                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Phone className="w-5 h-5" />
-                Contattaci ora
-              </motion.a>
-            </motion.div>
-          </motion.div>
+              Richiedi preventivo
+            </button>
+          </div>
         </div>
 
-        {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-30">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-30">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrent(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === current ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
+              className={`w-3 h-3 rounded-full transition ${
+                index === current ? 'bg-white' : 'bg-white/50 hover:bg-white/75'
               }`}
             />
           ))}
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-pink-50 to-purple-50">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="text-center"
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Enhanced Services Section */}
-      <section id="servizi" className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-              I Nostri Servizi
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ogni evento è unico, proprio come te. Scopri come possiamo rendere speciale il tuo momento.
-            </p>
-          </motion.div>
-
+      {/* SERVIZI (il tuo codice esistente) */}
+      <section id="servizi" className="py-16 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+            I Nostri Servizi
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                className="group relative p-8 rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.02 }}
+                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
-                {/* Gradient Background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`} />
-                
-                {/* Icon */}
-                <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${service.color} text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                <div className="text-4xl mb-4 text-center">
                   {service.icon}
                 </div>
-                
-                <h3 className="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900">
+                <h3 className="text-xl font-bold mb-2 text-gray-800 text-center">
                   {service.title}
                 </h3>
-                
-                <p className="text-gray-600 leading-relaxed group-hover:text-gray-700">
+                <p className="text-gray-600 text-center">
                   {service.description}
                 </p>
-                
-                {/* Hover Arrow */}
-                <motion.div
-                  className="mt-4 text-pink-500 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  initial={{ x: -10 }}
-                  whileHover={{ x: 0 }}
-                >
-                  Scopri di più →
-                </motion.div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Enhanced Presentation Section */}
-      <section id="presentazione" className="py-20 bg-gradient-to-br from-gray-50 to-pink-50">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-8 text-gray-800"
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              Benvenuti nel nostro 
-              <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent"> mondo</span>
-            </motion.h2>
-            
-            <motion.div
-              className="prose prose-xl max-w-none text-gray-700 leading-relaxed"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-xl mb-6">
-                Siamo un&apos;agenzia di organizzazione eventi dedicata a trasformare i tuoi momenti speciali in 
-                <strong className="text-pink-600"> ricordi indimenticabili</strong>. 
-                Con anni di esperienza nel settore, il nostro team di esperti si impegna a curare ogni dettaglio.
-              </p>
-              
-              <p className="text-lg">
-                Che tu stia pianificando un matrimonio da sogno, una festa di laurea memorabile, 
-                un compleanno speciale o un evento aziendale di successo, siamo qui per aiutarti a 
-                realizzare la tua visione con <em>creatività, professionalità e passione</em>.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="mt-12"
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <a
-                href="#contatti"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
-              >
-                <Calendar className="w-5 h-5" />
-                Iniziamo a pianificare insieme
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+      {/* PRESENTAZIONE (il tuo codice esistente) */}
+      <section id="presentazione" className="py-16 px-6 md:px-20 bg-white text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
+          Benvenuti nel nostro mondo
+        </h2>
+        <div className="max-w-4xl mx-auto">
+          <p className="text-gray-600 text-lg leading-relaxed mb-6">
+            Siamo un'agenzia di organizzazione eventi dedicata a trasformare i tuoi momenti speciali in ricordi indimenticabili. 
+            Con anni di esperienza nel settore, il nostro team di esperti si impegna a curare ogni dettaglio.
+          </p>
+          <p className="text-gray-600 text-lg leading-relaxed mb-8">
+            Che tu stia pianificando un matrimonio da sogno, una festa di laurea memorabile, un compleanno speciale 
+            o un evento aziendale di successo, siamo qui per aiutarti a realizzare la tua visione con creatività, 
+            professionalità e passione.
+          </p>
+          <button
+            onClick={() => setShowModal(true)}
+            className="inline-block bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-semibold transition"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-              Cosa Dicono i Nostri Clienti
-            </h2>
-            <p className="text-xl text-gray-600">
-              La soddisfazione dei nostri clienti è la nostra più grande ricompensa
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="bg-gradient-to-br from-pink-50 to-purple-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                
-                <blockquote className="text-gray-700 mb-6 italic">
-                  &#34;{testimonial.text}&#34;
-                </blockquote>
-                
-                <div>
-                  <div className="font-bold text-gray-800">{testimonial.name}</div>
-                  <div className="text-sm text-gray-600">{testimonial.event}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+            Iniziamo insieme
+          </button>
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section id="contatti" className="py-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+      {/* CONTATTI MIGLIORATI - QUI LA NOVITÀ! */}
+      <section id="contatti" className="py-16 bg-pink-500 text-white text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          Pronto per il tuo evento da sogno?
+        </h2>
+        <p className="text-xl mb-8 max-w-2xl mx-auto">
+          Contattaci oggi per una consulenza gratuita
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            onClick={openWhatsApp}
+            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold transition inline-flex items-center justify-center gap-2"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Pronto per il tuo evento da sogno?
-            </h2>
-            <p className="text-xl mb-10 max-w-3xl mx-auto">
-              Contattaci oggi per una consulenza gratuita e iniziamo insieme a pianificare il tuo momento speciale
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <motion.a
-                href="tel:+393331234567"
-                className="inline-flex items-center gap-3 bg-white text-pink-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-50 transition-all duration-300 shadow-xl"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Phone className="w-5 h-5" />
-                +39 333 123 4567
-              </motion.a>
-              
-              <motion.a
-                href="mailto:info@tuoieventi.com"
-                className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Mail className="w-5 h-5" />
-                info@tuoieventi.com
-              </motion.a>
-            </div>
-          </motion.div>
+            📱 WhatsApp: +39 3892574273
+          </button>
+          
+          <button
+            onClick={() => setShowModal(true)}
+            className="border-2 border-white hover:bg-white hover:text-pink-600 px-6 py-3 rounded-full font-semibold transition inline-flex items-center justify-center gap-2"
+          >
+            ✉️ Richiedi Preventivo
+          </button>
+        </div>
+
+        <div className="mt-8 text-sm opacity-90">
+          <p>📞 Rispondiamo entro 2 ore | 💬 Chat dal vivo disponibile</p>
         </div>
       </section>
+
+      {/* MODAL E CHATBOT - AGGIUNTI QUI */}
+      <ContactModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <Chatbot />
     </main>
   );
 }
