@@ -1,18 +1,15 @@
-import "./globals.css";
-import Header from "@/components/Header";
+
+import './globals.css'
 
 export const metadata = {
-  title: "Eventi",
-  description: "Organizziamo i tuoi momenti speciali",
-};
+  title: 'Fast Events - Organizzazione Eventi',
+  description: 'Matrimoni, feste di laurea, compleanni ed eventi aziendali. Organizziamo i tuoi momenti speciali.',
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="it">
-      <body className="antialiased">
-        <Header />
-        <div className="pt-16">{children}</div> 
-      </body>
+      <body>{children}</body>
     </html>
-  );
+  )
 }
