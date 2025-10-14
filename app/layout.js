@@ -1,9 +1,8 @@
-
 import './globals.css'
 
 export const metadata = {
   title: 'Fast Events - Organizzazione Eventi',
-  description: 'Matrimoni, feste di laurea, compleanni ed eventi aziendali. Organizziamo i tuoi momenti speciali.',
+  description: 'Matrimoni, feste di laurea, compleanni ed eventi aziendali.',
 }
 
 export default function RootLayout({ children }) {
