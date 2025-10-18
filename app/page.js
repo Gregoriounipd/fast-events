@@ -287,7 +287,7 @@ export default function Home() {
 
   // Funzione WhatsApp
   const openWhatsApp = () => {
-    const phoneNumber = '3892574273';
+    const phoneNumber = '3921209212';
     const message = 'Ciao! Sono interessato ai vostri servizi per organizzazione eventi. Potreste darmi maggiori informazioni?';
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
