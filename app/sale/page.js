@@ -201,7 +201,7 @@ export default function SalePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://wa.me/3892574273?text=Ciao! Vorrei informazioni sulle vostre location."
+              href="https://wa.me/3921209212?text=Ciao! Vorrei informazioni sulle vostre location."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-[#D4AF37] text-[#1A237E] px-8 py-4 rounded-full font-bold hover:bg-[#DAB86A] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"

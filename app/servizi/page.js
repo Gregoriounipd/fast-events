@@ -434,7 +434,7 @@ export default function ServiziPage() {
 
               <div className="text-center">
                 <a
-                  href="https://wa.me/3892574273?text=Ciao! Vorrei informazioni sui vostri servizi."
+                  href="https://wa.me/3921209212?text=Ciao! Vorrei informazioni sui vostri servizi."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 bg-green-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-600 transition-all duration-300 hover:scale-105"

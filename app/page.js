@@ -235,28 +235,28 @@ function Chatbot() {
             </p>
             <div className="space-y-2">
               <button
-                onClick={() => window.open('https://wa.me/3892574273?text=Ciao! Vorrei informazioni sui matrimoni e i vostri servizi.', '_blank')}
+                onClick={() => window.open('https://wa.me/3921209212?text=Ciao! Vorrei informazioni sui matrimoni e i vostri servizi.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-blue-50 rounded-lg hover:bg-blue-100 text-xs sm:text-sm transition-colors border border-blue-200"
               >
                 <span className="text-base sm:text-lg mr-2">💒</span>
                 <strong>Matrimoni</strong> - Info complete sui nostri servizi
               </button>
               <button
-                onClick={() => window.open('https://wa.me/3892574273?text=Ciao! Vorrei organizzare una festa di laurea.', '_blank')}
+                onClick={() => window.open('https://wa.me/39212092123?text=Ciao! Vorrei organizzare una festa di laurea.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-amber-50 rounded-lg hover:bg-amber-100 text-xs sm:text-sm transition-colors border border-amber-200"
               >
                 <span className="text-base sm:text-lg mr-2">🎓</span>
                 <strong>Feste di Laurea</strong> - Celebra il tuo successo
               </button>
               <button
-                onClick={() => window.open('https://wa.me/3892574273?text=Ciao! Vorrei organizzare un compleanno speciale.', '_blank')}
+                onClick={() => window.open('https://wa.me/3921209212?text=Ciao! Vorrei organizzare un compleanno speciale.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-amber-50 rounded-lg hover:bg-amber-100 text-xs sm:text-sm transition-colors border border-amber-200"
               >
                 <span className="text-base sm:text-lg mr-2">🎂</span>
                 <strong>Compleanni</strong> - Feste memorabili
               </button>
               <button
-                onClick={() => window.open('https://wa.me/3892574273?text=Ciao! Vorrei organizzare un evento aziendale.', '_blank')}
+                onClick={() => window.open('https://wa.me/3921209212?text=Ciao! Vorrei organizzare un evento aziendale.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-slate-50 rounded-lg hover:bg-slate-100 text-xs sm:text-sm transition-colors border border-slate-200"
               >
                 <span className="text-base sm:text-lg mr-2">🏢</span>
@@ -285,7 +285,7 @@ export default function Home() {
 
   // Funzione WhatsApp
   const openWhatsApp = () => {
-    const phoneNumber = '3892574273';
+    const phoneNumber = '3921209212';
     const message = 'Ciao! Sono interessato ai vostri servizi per organizzazione eventi. Potreste darmi maggiori informazioni?';
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
