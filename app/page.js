@@ -119,7 +119,7 @@ function ContactModal({ isOpen, onClose }) {
               name="telefono"
               value={formData.telefono}
               onChange={handleChange}
-              placeholder="+39 389 257 4273"
+              placeholder="+39 392 1209 212"
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
             />
           </div>
@@ -505,7 +505,7 @@ export default function Home() {
                   </div>
                   <div className="text-left">
                     <div className="text-xs sm:text-sm opacity-90">WhatsApp</div>
-                    <div className="font-bold text-sm sm:text-base">+39 389 257 4273</div>
+                    <div className="font-bold text-sm sm:text-base">+39 392 1209 212</div>
                   </div>
                   <div className="ml-2 transform group-hover:scale-110 transition-transform duration-300 hidden sm:block">
                     <span className="text-xl">📱</span>

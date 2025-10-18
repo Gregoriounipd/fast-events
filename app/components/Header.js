@@ -34,7 +34,7 @@ export default function Header() {
                     {/* Brand Name */}
                     <div className="flex flex-col">
                         <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-900 via-blue-800 to-amber-600 bg-clip-text text-transparent">
-                            Fast Events
+                            Adori Events
                         </span>
                         <span className="text-[10px] sm:text-xs text-slate-600 font-medium -mt-1 hidden sm:block">
                             Organizziamo i tuoi sogni

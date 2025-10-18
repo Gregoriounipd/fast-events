@@ -458,7 +458,7 @@ export default function MatrimonioSection() {
                 </div>
                 <div>
                   <div className="font-semibold">Chiamaci ora</div>
-                  <div className="opacity-90">+39 389 257 4273</div>
+                  <div className="opacity-90">+39 392 120 9212</div>
                 </div>
               </div>
             </div>
