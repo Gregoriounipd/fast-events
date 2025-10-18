@@ -29,13 +29,7 @@ const services = [
     gradient: "from-orange-400 to-amber-500",
     hoverColor: "hover:text-orange-600"
   },
-  {
-    icon: "🏢",
-    title: "Eventi Aziendali",
-    description: "Conferenze e team building",
-    gradient: "from-slate-500 to-gray-600",
-    hoverColor: "hover:text-slate-600"
-  }
+  
 ];
 
 // FORM POPUP MIGLIORATO
@@ -143,11 +137,9 @@ function ContactModal({ isOpen, onClose }) {
               onChange={handleChange}
               className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-gradient-to-r from-gray-50 to-white hover:from-white hover:to-gray-50 text-gray-800 font-medium shadow-sm cursor-pointer"
             >
-              <option value="matrimonio">💒 Matrimonio</option>
+              
               <option value="laurea">🎓 Festa di Laurea</option>
               <option value="compleanno">🎂 Compleanno</option>
-              <option value="aziendale">🏢 Evento Aziendale</option>
-              <option value="battesimo">⛪ Battesimo/Comunione</option>
               <option value="anniversario">💕 Anniversario</option>
               <option value="altro">🎉 Altro</option>
             </select>
