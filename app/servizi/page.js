@@ -18,16 +18,18 @@ const services = [
       'Torte artistiche su misura',
       'Giochi e attività',
       'Allestimenti scenografici',
-      'Servizio catering completo',
-      'Location indoor e outdoor'
+      'Open bar e bartender',
+      'Location indoor e outdoor',
+      'Servizio fotografico e video',
+      'Dj e musica dal vivo',
+      'Impianto audio luci'
     ],
-    priceRange: 'Da €500',
+    priceRange: 'Tuo budget',
     gradient: 'from-orange-400 to-amber-500',
     bgColor: 'bg-orange-50',
     textColor: 'text-orange-600',
     href: '/compleanni',
     image: '/images/compleanno-hero.jpg',
-    stats: { eventi: '300+', soddisfazione: '97%' }
   },
   {
     id: 'feste-laurea',
@@ -36,49 +38,51 @@ const services = [
     shortDescription: 'Celebra il tuo traguardo con stile',
     fullDescription: 'Feste di laurea memorabili per celebrare il raggiungimento del tuo obiettivo accademico. Dalla location al catering, pensiamo a tutto noi.',
     features: [
-      'Location universitarie e non',
-      'Buffet e menu personalizzati',
+      'Location indoor e outdoor',
+      'Open bar e bartender',
       'Decorazioni a tema',
       'Servizio audio e video',
       'Animazione e intrattenimento',
       'Servizio fotografico',
-      'Gadget personalizzati'
+      'DJ e musica dal vivo',
+      'Impianto audio luci',
     ],
-    priceRange: 'Da €800',
+    priceRange: 'Tuo budget',
     gradient: 'from-blue-500 to-indigo-600',
     bgColor: 'bg-blue-50',
     textColor: 'text-blue-600',
     href: '/feste-laurea',
     image: '/images/laurea-hero.jpg',
-    stats: { eventi: '150+', soddisfazione: '95%' }
+
   }
 ];
 
 // Altri servizi
 const otherServices = [
   {
-    icon: '🎉',
-    title: 'Battesimi e Comunioni',
-    description: 'Cerimonie religiose con allestimenti eleganti e catering raffinato',
-    price: 'Da €600'
+    icon: '🎧',
+    title: 'DJ-set (Playlist Personalizzate), Voicer',
+    description: 'Esperienza sonora che trasforma ogni tuo evento',
   },
   {
-    icon: '💕',
-    title: 'Anniversari',
-    description: 'Celebra i momenti importanti con una festa su misura',
-    price: 'Da €400'
+    icon: '💡',
+    title: 'Audio & luci',
+    description: 'Impianti audio professionali e giochi di luce per valorizzare ogni momento della festa.',
   },
   {
-    icon: '🎭',
-    title: 'Eventi Privati',
-    description: 'Feste ed eventi personalizzati per ogni occasione',
-    price: 'Da €500'
+    icon: '📸',
+    title: 'Foto & Video',
+    description: 'Fotografi e videomaker catturano i momenti più belli, trasformandoli in ricordi indimenticabili.',
   },
   {
-    icon: '🎪',
-    title: 'Feste a Tema',
-    description: 'Eventi tematici creativi e coinvolgenti',
-    price: 'Da €700'
+    icon: '🎈',
+    title: 'Allestimenti & decorazioni',
+    description: 'Scenografie, palloncini e decorazioni a tema per un ambiente curato e coinvolgente.',
+  },
+  {
+    icon: '🪩',
+    title: 'Location & Noleggi',
+    description: 'Ville e locali esclusivi: scegli la cornice perfetta per il tuo evento.',
   }
 ];
 
@@ -105,7 +109,7 @@ function QuickQuoteForm() {
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
       <h3 className="text-xl font-bold mb-4 text-gray-800">Richiedi Preventivo Veloce</h3>
-      
+
       <div className="space-y-4">
         <input
           type="text"
@@ -116,7 +120,7 @@ function QuickQuoteForm() {
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           required
         />
-        
+
         <input
           type="email"
           name="email"
@@ -126,7 +130,7 @@ function QuickQuoteForm() {
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           required
         />
-        
+
         <input
           type="tel"
           name="telefono"
@@ -135,7 +139,7 @@ function QuickQuoteForm() {
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
         />
-        
+
         <select
           name="servizio"
           value={formData.servizio}
@@ -147,7 +151,7 @@ function QuickQuoteForm() {
           <option value="compleanni">🎂 Compleanni</option>
           <option value="altro">🎉 Altro</option>
         </select>
-        
+
         <textarea
           name="messaggio"
           placeholder="Descrivi il tuo evento..."
@@ -156,7 +160,7 @@ function QuickQuoteForm() {
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
         />
-        
+
         <button
           onClick={handleSubmit}
           className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 hover:scale-105"
@@ -171,15 +175,15 @@ function QuickQuoteForm() {
 export default function ServiziPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      
+
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-20">
+      <section className="relative h-[50vh] bg-gradient-to-r from-[#1A237E] via-[#283593] to-[#1A237E]">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             I Nostri Servizi
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
-            Dalle feste di laurea ai compleanni più creativi. 
+            Dalle feste di laurea ai compleanni più creativi.
             Ogni occasione merita la perfezione.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -218,8 +222,8 @@ export default function ServiziPage() {
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
             Con oltre 15 anni di esperienza nell&apos;organizzazione eventi, il nostro team
-            di professionisti si dedica a creare esperienze uniche e indimenticabili. 
-            Dalla pianificazione alla realizzazione, ci occupiamo di ogni dettaglio 
+            di professionisti si dedica a creare esperienze uniche e indimenticabili.
+            Dalla pianificazione alla realizzazione, ci occupiamo di ogni dettaglio
             per garantire il successo del vostro evento.
           </p>
         </div>
@@ -250,11 +254,11 @@ export default function ServiziPage() {
                       {service.icon}
                     </div>
                     <div className="text-right">
-                      <div className="text-sm font-medium text-gray-600">A partire da</div>
+                      <div className="text-sm font-medium text-gray-600">A partire dal</div>
                       <div className={`text-2xl font-bold ${service.textColor}`}>{service.priceRange}</div>
                     </div>
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">
                     {service.title}
                   </h3>
@@ -265,7 +269,7 @@ export default function ServiziPage() {
 
                 {/* Service Features */}
                 <div className="p-8">
-                  <h4 className="font-semibold text-gray-800 mb-4">Cosa Include:</h4>
+                  <h4 className="font-semibold text-gray-800 mb-4">Cosa Può Includere:</h4>
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center text-gray-600">
@@ -275,17 +279,7 @@ export default function ServiziPage() {
                     ))}
                   </ul>
 
-                  {/* Stats */}
-                  <div className="flex gap-6 mb-6 p-4 bg-gray-50 rounded-lg">
-                    <div>
-                      <div className="text-2xl font-bold text-gray-800">{service.stats.eventi}</div>
-                      <div className="text-sm text-gray-600">Eventi organizzati</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-gray-800">{service.stats.soddisfazione}</div>
-                      <div className="text-sm text-gray-600">Clienti soddisfatti</div>
-                    </div>
-                  </div>
+
 
                   {/* Action Buttons */}
                   <div className="flex gap-4">
@@ -313,9 +307,7 @@ export default function ServiziPage() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-            Altri Servizi Disponibili
-          </h2>
-          
+            Ti serve solo un servizio? Scegli quello che ti manca          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {otherServices.map((service, idx) => (
               <div
@@ -326,51 +318,14 @@ export default function ServiziPage() {
                   <div className="text-4xl mb-3">{service.icon}</div>
                   <h3 className="text-lg font-bold text-gray-800 mb-2">{service.title}</h3>
                   <p className="text-sm text-gray-600 mb-3">{service.description}</p>
-                  <div className="text-indigo-600 font-semibold">{service.price}</div>
+
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-              Perché Scegliere Fast Events
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                ⭐
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">15+ Anni di Esperienza</h3>
-              <p className="text-gray-600">Oltre 500 eventi organizzati con successo in tutta Italia.</p>
-            </div>
             
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                💎
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Servizio Personalizzato</h3>
-              <p className="text-gray-600">Ogni evento è unico. Creiamo soluzioni su misura per te.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                🤝
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Partner Affidabili</h3>
-              <p className="text-gray-600">Collaboriamo solo con i migliori fornitori della regione.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Quick Contact Form */}
       <section id="contatto-rapido" className="py-20 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
@@ -387,11 +342,11 @@ export default function ServiziPage() {
             <div>
               <QuickQuoteForm />
             </div>
-            
+
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
                 <h3 className="text-xl font-bold text-gray-800 mb-4">Contattaci Direttamente</h3>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
@@ -402,17 +357,11 @@ export default function ServiziPage() {
                       <div className="text-gray-600">+39 389 257 4273</div>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-blue-600">✉️</span>
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-800">Email</div>
-                      <div className="text-gray-600">info@fast-events.com</div>
-                    </div>
-                  </div>
                   
+                  </div>
+
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
                       <span className="text-purple-600">⏰</span>

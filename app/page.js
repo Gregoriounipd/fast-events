@@ -350,7 +350,7 @@ export default function Home() {
               <span className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl">i tuoi momenti speciali</span>
             </h1>
             <p className="mt-3 sm:mt-4 max-w-3xl text-sm sm:text-base md:text-lg lg:text-2xl mb-6 sm:mb-8 lg:mb-10 leading-relaxed opacity-90 px-2">
-              Matrimoni da sogno, feste di laurea memorabili, compleanni indimenticabili ed eventi aziendali di successo.
+              Feste di laurea memorabili, compleanni indimenticabili ed Diciottesimi.
               <br className="hidden sm:inline" />
               <span className="text-amber-300 block sm:inline mt-2 sm:mt-0"> Ci occupiamo di tutto, tu pensa solo a goderti l'attimo ✨</span>
             </p>
@@ -458,8 +458,8 @@ export default function Home() {
               </p>
 
               <p className="text-sm sm:text-base lg:text-lg text-slate-700 leading-relaxed px-2">
-                Che tu stia pianificando un matrimonio da sogno, una festa di laurea memorabile, un compleanno speciale
-                o un evento aziendale di successo, siamo qui per aiutarti a realizzare la tua visione con
+                Che tu stia pianificando una festa di laurea memorabile, un compleanno speciale
+                o un diciottesimo, siamo qui per aiutarti a realizzare la tua visione con
                 <em> creatività, professionalità e passione</em>.
               </p>
             </div>
