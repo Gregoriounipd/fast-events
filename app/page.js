@@ -242,7 +242,7 @@ function Chatbot() {
                 <strong>Matrimoni</strong> - Info complete sui nostri servizi
               </button>
               <button
-                onClick={() => window.open('https://wa.me/39212092123?text=Ciao! Vorrei organizzare una festa di laurea.', '_blank')}
+                onClick={() => window.open('https://wa.me/3921209212?text=Ciao! Vorrei organizzare una festa di laurea.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-amber-50 rounded-lg hover:bg-amber-100 text-xs sm:text-sm transition-colors border border-amber-200"
               >
                 <span className="text-base sm:text-lg mr-2">🎓</span>
@@ -340,8 +340,11 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Overlay oro e blu - MOBILE OPTIMIZED */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-slate-900/75 to-blue-900/65 flex flex-col items-center justify-center text-center text-white px-4 sm:px-6 lg:px-4 z-10">
+          {/* Overlay SEPARATO - solo per sfondo scuro */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-slate-900/75 to-blue-900/65 z-5"></div>
+
+          {/* Contenuto sopra l'overlay - z-index più alto */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 sm:px-6 lg:px-4 z-20">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
               <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-200 bg-clip-text text-transparent">
                 Organizziamo
@@ -355,10 +358,10 @@ export default function Home() {
               <span className="text-amber-300 block sm:inline mt-2 sm:mt-0"> Ci occupiamo di tutto, tu pensa solo a goderti l'attimo ✨</span>
             </p>
 
-            {/* Bottoni Hero - MOBILE STACKED */}
+            {/* Bottoni Hero - ORA CLICCABILI */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 w-full max-w-2xl px-4">
-              <a
-                href="#servizi"
+              <Link
+                href="/servizi"
                 className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-900 via-blue-800 to-amber-700 text-white font-semibold text-sm sm:text-base rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/25 w-full sm:w-auto"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-900 to-amber-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -367,7 +370,7 @@ export default function Home() {
                   <span>Scopri tutti i servizi</span>
                   <span className="transform group-hover:translate-x-1 transition-transform duration-300 hidden sm:inline">→</span>
                 </div>
-              </a>
+              </Link>
 
               <button
                 onClick={() => setShowModal(true)}
@@ -389,8 +392,8 @@ export default function Home() {
                 key={index}
                 onClick={() => setCurrent(index)}
                 className={`transition-all duration-300 ${index === current
-                    ? 'w-6 sm:w-8 h-2 sm:h-3 bg-amber-400 rounded-full'
-                    : 'w-2 sm:w-3 h-2 sm:h-3 bg-amber-400/50 hover:bg-amber-400/75 rounded-full'
+                  ? 'w-6 sm:w-8 h-2 sm:h-3 bg-amber-400 rounded-full'
+                  : 'w-2 sm:w-3 h-2 sm:h-3 bg-amber-400/50 hover:bg-amber-400/75 rounded-full'
                   }`}
               />
             ))}
@@ -505,7 +508,7 @@ export default function Home() {
                   </div>
                   <div className="text-left">
                     <div className="text-xs sm:text-sm opacity-90">WhatsApp</div>
-                    <div className="font-bold text-sm sm:text-base">+39 392 1209 212</div>
+                    <div className="font-bold text-sm sm:text-base">+39 392 120 9212</div>
                   </div>
                   <div className="ml-2 transform group-hover:scale-110 transition-transform duration-300 hidden sm:block">
                     <span className="text-xl">📱</span>
