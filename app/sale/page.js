@@ -42,20 +42,20 @@ export default function SalePage() {
                 Location Selezionate con Cura
               </h2>
               <p className="text-lg text-[#424242] leading-relaxed mb-6">
-                Collaboriamo esclusivamente con le migliori location della Lombardia. 
+                Collaboriamo esclusivamente con le migliori location del Veneto. 
                 Ogni spazio è stato selezionato personalmente dal nostro team per garantire 
                 qualità, eleganza e servizi impeccabili.
               </p>
               <p className="text-lg text-[#424242] leading-relaxed mb-6">
-                Che tu stia cercando una villa storica per un matrimonio da favola, 
+                Che tu stia cercando una villa storica per una laurea da favola, 
                 un castello affacciato sul lago, o un loft moderno per un evento corporate, 
                 abbiamo la soluzione perfetta per te.
               </p>
               <div className="flex gap-4 items-center">
-                <div className="text-5xl font-bold text-[#D4AF37]">50+</div>
+                <div className="text-5xl font-bold text-[#D4AF37]">10+</div>
                 <div className="text-[#424242]">
                   <div className="font-semibold text-[#1A237E]">Location Partner</div>
-                  <div className="text-sm">In tutta la Lombardia</div>
+                  <div className="text-sm">In tutto il Veneto</div>
                 </div>
               </div>
             </div>

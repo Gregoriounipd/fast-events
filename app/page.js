@@ -30,22 +30,53 @@ const services = [
   },
 ];
 
-// FORM POPUP MOBILE-FRIENDLY
+// FORM POPUP MOBILE-FRIENDLY CON GOOGLE FORMS
 function ContactModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
     telefono: '',
-    tipoEvento: 'matrimonio',
+    tipoEvento: 'Laurea',
     budget: '',
     messaggio: ''
   });
 
   const handleSubmit = async () => {
-    console.log('Form inviato:', formData);
-    alert('Richiesta inviata! Ti contatteremo presto.');
-    onClose();
-    setFormData({ nome: '', email: '', telefono: '', tipoEvento: 'matrimonio', budget: '', messaggio: '' });
+    try {
+      // URL del Google Form (formResponse invece di viewform)
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSePasSeI0x6sb0BsNxKi8vcx1ZfMQVbCHUMsYV6y8yBvF2VDQ/formResponse';
+      
+      // Prepara i dati con gli ID corretti
+      const formDataToSend = new FormData();
+      formDataToSend.append('entry.1286963313', formData.nome);
+      formDataToSend.append('entry.1755813807', formData.email);
+      formDataToSend.append('entry.1852190146', formData.telefono);
+      formDataToSend.append('entry.33183968', formData.tipoEvento);
+      formDataToSend.append('entry.121710793', formData.budget);
+      formDataToSend.append('entry.2097799976', formData.messaggio);
+
+      // Invia a Google Forms in background
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        body: formDataToSend,
+        mode: 'no-cors',
+      });
+
+      console.log('Form inviato con successo!', formData);
+      alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
+      onClose();
+      setFormData({ 
+        nome: '', 
+        email: '', 
+        telefono: '', 
+        tipoEvento: 'Laurea', 
+        budget: '', 
+        messaggio: '' 
+      });
+    } catch (error) {
+      console.error('Errore invio:', error);
+      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 389 257 4273');
+    }
   };
 
   const handleChange = (e) => {
@@ -119,7 +150,7 @@ function ContactModal({ isOpen, onClose }) {
               name="telefono"
               value={formData.telefono}
               onChange={handleChange}
-              placeholder="+39 392 1209 212"
+              placeholder="+39 389 257 4273"
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
             />
           </div>
@@ -135,10 +166,10 @@ function ContactModal({ isOpen, onClose }) {
               onChange={handleChange}
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 font-medium shadow-sm cursor-pointer text-base"
             >
-              <option value="laurea">🎓 Festa di Laurea</option>
-              <option value="compleanno">🎂 Compleanno</option>
-              <option value="anniversario">💕 Anniversario</option>
-              <option value="altro">🎉 Altro</option>
+              <option value="Laurea">🎓 Festa di Laurea</option>
+              <option value="Compleanno">🎂 Compleanno</option>
+              <option value="Anniversario">💕 Anniversario</option>
+              <option value="Altro">🎉 Altro</option>
             </select>
           </div>
 
