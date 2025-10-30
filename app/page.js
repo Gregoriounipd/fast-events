@@ -168,7 +168,6 @@ function ContactModal({ isOpen, onClose }) {
             >
               <option value="Laurea">🎓 Festa di Laurea</option>
               <option value="Compleanno">🎂 Compleanno</option>
-              <option value="Anniversario">💕 Anniversario</option>
               <option value="Altro">🎉 Altro</option>
             </select>
           </div>
