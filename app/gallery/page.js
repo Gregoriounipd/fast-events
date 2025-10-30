@@ -72,7 +72,7 @@ function ContactModal({ isOpen, onClose }) {
           </div>
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">Telefono</label>
-            <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="+39 389 257 4273" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800 text-base" />
+            <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="il tuo numero di telefono" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800 text-base" />
           </div>
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">Tipo di Evento *</label>

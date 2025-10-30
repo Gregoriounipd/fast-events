@@ -354,7 +354,7 @@ export default function ServiziPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-gray-800">WhatsApp</div>
-                    <div className="text-gray-600">+39 389 257 4273</div>
+                    <div className="text-gray-600">+39 392 1209 212</div>
                   </div>
                 </div>
 

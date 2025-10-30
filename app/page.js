@@ -75,7 +75,7 @@ function ContactModal({ isOpen, onClose }) {
       });
     } catch (error) {
       console.error('Errore invio:', error);
-      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 389 257 4273');
+      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 3921209212');
     }
   };
 
@@ -150,7 +150,7 @@ function ContactModal({ isOpen, onClose }) {
               name="telefono"
               value={formData.telefono}
               onChange={handleChange}
-              placeholder="+39 389 257 4273"
+              placeholder="il tuo numero di telefono"
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
             />
           </div>

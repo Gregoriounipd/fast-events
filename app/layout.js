@@ -1,8 +1,11 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Fast Events - Organizzazione Eventi',
-  description: 'Matrimoni, feste di laurea, compleanni ed eventi aziendali.',
+  title: 'Adori-Events - Organizzazione Eventi',
+  description: 'Diciottesimi, feste di laurea, compleanni ed eventi aziendali.',
+  icons: {
+    icon: 'icon.png',
+  },
 }
 
 export default function RootLayout({ children }) {
