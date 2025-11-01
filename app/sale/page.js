@@ -1,12 +1,135 @@
 "use client";
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+
+
+// QUICK QUOTE FORM
+function QuickQuoteForm() {
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    telefono: '',
+    tipoEvento: 'Laurea',
+    numeroPartecipanti: '',
+    messaggio: ''
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSePasSeI0x6sb0BsNxKi8vcx1ZfMQVbCHUMsYV6y8yBvF2VDQ/formResponse';
+      
+      const formDataToSend = new FormData();
+      formDataToSend.append('entry.1286963313', formData.nome);
+      formDataToSend.append('entry.1755813807', formData.email);
+      formDataToSend.append('entry.1852190146', formData.telefono);
+      formDataToSend.append('entry.33183968', formData.tipoEvento);
+      formDataToSend.append('entry.2097799976', formData.messaggio);
+
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        body: formDataToSend,
+        mode: 'no-cors',
+      });
+
+      alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
+      setFormData({ nome: '', email: '', telefono: '', tipoEvento: 'Laurea', numeroPartecipanti: '', messaggio: '' });
+    } catch (error) {
+      alert('❌ Errore nell\'invio. Contattaci su WhatsApp: +39 392 1209 212');
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-amber-200">
+      <h3 className="text-2xl font-bold text-slate-900 mb-6">Richiedi Info Rapide</h3>
+      
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-semibold text-slate-800 mb-2">Nome *</label>
+          <input
+            type="text"
+            name="nome"
+            value={formData.nome}
+            onChange={handleChange}
+            placeholder="Il tuo nome"
+            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-800 mb-2">Email *</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="tua@email.com"
+            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-800 mb-2">Telefono</label>
+          <input
+            type="tel"
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleChange}
+            placeholder="+39 392 120 9212"
+            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-800 mb-2">Tipo Evento *</label>
+          <select
+            name="tipoEvento"
+            value={formData.tipoEvento}
+            onChange={handleChange}
+            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
+          >
+            <option value="Laurea">🎓 Festa di Laurea</option>
+            <option value="Compleanno">🎂 Compleanno</option>
+            <option value="Diciottesimo">🎉 Diciottesimo</option>
+            <option value="Altro">✨ Altro</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-800 mb-2">Messaggio</label>
+          <textarea
+            name="messaggio"
+            value={formData.messaggio}
+            onChange={handleChange}
+            placeholder="Raccontaci brevemente cosa hai in mente..."
+            rows="3"
+            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800 resize-none"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full py-4 bg-gradient-to-r from-blue-900 via-blue-800 to-amber-700 text-white font-semibold rounded-xl hover:from-blue-950 hover:to-amber-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
+          Invia Richiesta ✨
+        </button>
+      </div>
+    </form>
+  );
+}
 
 export default function SalePage() {
   return (
     <div className="min-h-screen bg-[#FFFEF7]">
-      
+
       {/* Hero Section */}
       <section className="relative h-[50vh] bg-gradient-to-r from-[#1A237E] via-[#283593] to-[#1A237E]">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -42,13 +165,13 @@ export default function SalePage() {
                 Location Selezionate con Cura
               </h2>
               <p className="text-lg text-[#424242] leading-relaxed mb-6">
-                Collaboriamo esclusivamente con le migliori location del Veneto. 
-                Ogni spazio è stato selezionato personalmente dal nostro team per garantire 
+                Collaboriamo esclusivamente con le migliori location del Veneto.
+                Ogni spazio è stato selezionato personalmente dal nostro team per garantire
                 qualità, eleganza e servizi impeccabili.
               </p>
               <p className="text-lg text-[#424242] leading-relaxed mb-6">
-                Che tu stia cercando una villa storica per una laurea da favola, 
-                un castello affacciato sul lago, o un loft moderno per un evento corporate, 
+                Che tu stia cercando una villa storica per una laurea da favola,
+                un castello affacciato sul lago, o un loft moderno per un evento corporate,
                 abbiamo la soluzione perfetta per te.
               </p>
               <div className="flex gap-4 items-center">
@@ -77,7 +200,7 @@ export default function SalePage() {
       <section className="py-20 bg-gradient-to-br from-[#FFFEF7] to-[#F5F5DC]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            
+
             {/* Immagine */}
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl order-2 md:order-1 ring-2 ring-[#D4AF37]/20">
               <Image
@@ -189,36 +312,76 @@ export default function SalePage() {
           </div>
         </div>
       </section>
+      {/* Quick Contact Form */}
+      < section id="contatto-rapido" className="py-20 px-6 bg-white" >
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+              Richiedi un Preventivo Gratuito
+            </h2>
+            <p className="text-xl text-gray-600">
+              Raccontaci la tua idea e ti aiuteremo a realizzarla
+            </p>
+          </div>
 
-      {/* CTA Final */}
-      <section className="py-20 bg-gradient-to-r from-[#1A237E] via-[#283593] to-[#1A237E]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Non Trovi la Location Perfetta?
-          </h2>
-          <p className="text-xl mb-8 text-white/90">
-            Contattaci e troveremo insieme lo spazio ideale per il tuo evento
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://wa.me/3921209212?text=Ciao! Vorrei informazioni sulle vostre location."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#D4AF37] text-[#1A237E] px-8 py-4 rounded-full font-bold hover:bg-[#DAB86A] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-            >
-              <span className="text-xl">💬</span>
-              <span>Contattaci su WhatsApp</span>
-            </a>
-            <a
-              href="#contatti"
-              className="inline-flex items-center gap-3 border-2 border-[#D4AF37] text-white px-8 py-4 rounded-full font-bold hover:bg-[#D4AF37] hover:text-[#1A237E] transition-all duration-300"
-            >
-              <span className="text-xl">📧</span>
-              <span>Richiedi Consulenza</span>
-            </a>
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <QuickQuoteForm />
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-800 mb-4">Non trovi la location perfetta? Contattaci Direttamente</h3>
+
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <span className="text-green-600">📱</span>
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-800">WhatsApp</div>
+                      <div className="text-gray-600">+39 392 1209 212</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                      <span className="text-purple-600">⏰</span>
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-800">Orari</div>
+                      <div className="text-gray-600">Lun-Ven 9:00-18:00</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-6 rounded-xl">
+                <h4 className="text-lg font-bold mb-2">Consulenza Gratuita</h4>
+                <p className="text-sm opacity-90">
+                  Ti offriamo sempre una prima consulenza gratuita per capire le tue esigenze e proporti la soluzione migliore.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <a
+                  href="https://wa.me/3921209212?text=Ciao! Vorrei informazioni sui vostri servizi."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 bg-green-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-600 transition-all duration-300 hover:scale-105"
+                >
+                  <span>💬</span>
+                  <span>Contattaci su WhatsApp</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

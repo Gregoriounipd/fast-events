@@ -163,7 +163,7 @@ function QuickQuoteForm() {
 
         <button
           onClick={handleSubmit}
-          className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 hover:scale-105"
+          className="w-full py-4 bg-gradient-to-r from-blue-900 via-blue-800 to-amber-700 text-white font-semibold rounded-xl hover:from-blue-950 hover:to-amber-800 transition-all duration-300 shadow-lg hover:shadow-xl"
         >
           Invia Richiesta
         </button>

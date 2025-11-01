@@ -1,4 +1,6 @@
 import './globals.css'
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 export const metadata = {
   title: 'Adori Events - Feste di Laurea, Compleanni e Diciottesimi',
@@ -39,7 +41,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="it">
-      <body>{children}</body>
+      <body>
+        {children}
+        <GoogleAnalytics gaId="G-5ECQT641VW" />
+      </body>
     </html>
   )
 }
