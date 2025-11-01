@@ -44,16 +44,16 @@ function ContactModal({ isOpen, onClose }) {
   const handleSubmit = async () => {
     try {
       // URL del Google Form (formResponse invece di viewform)
-      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSePasSeI0x6sb0BsNxKi8vcx1ZfMQVbCHUMsYV6y8yBvF2VDQ/formResponse';
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
       
       // Prepara i dati con gli ID corretti
       const formDataToSend = new FormData();
-      formDataToSend.append('entry.1286963313', formData.nome);
-      formDataToSend.append('entry.1755813807', formData.email);
-      formDataToSend.append('entry.1852190146', formData.telefono);
-      formDataToSend.append('entry.33183968', formData.tipoEvento);
-      formDataToSend.append('entry.121710793', formData.budget);
-      formDataToSend.append('entry.2097799976', formData.messaggio);
+      formDataToSend.append('entry.1293752853', formData.nome);
+      formDataToSend.append('entry.1222330538', formData.email);
+      formDataToSend.append('entry.996676258', formData.telefono);
+      formDataToSend.append('entry.118566898', formData.tipoEvento);
+      formDataToSend.append('entry.984905371', formData.budget);
+      formDataToSend.append('entry.811715166', formData.messaggio);
 
       // Invia a Google Forms in background
       await fetch(GOOGLE_FORM_URL, {
