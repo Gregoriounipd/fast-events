@@ -222,7 +222,7 @@ export default function ServiziPage() {
           Cosa Possiamo Organizzare per Te
         </h2>
         <p className="text-xl text-gray-600 leading-relaxed">
-          Con oltre 15 anni di esperienza nell&apos;organizzazione eventi, il nostro team
+          Con oltre 3 anni di esperienza nell&apos;organizzazione eventi, il nostro team
           di professionisti si dedica a creare esperienze uniche e indimenticabili.
           Dalla pianificazione alla realizzazione, ci occupiamo di ogni dettaglio
           per garantire il successo del vostro evento.
