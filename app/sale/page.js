@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
+import Header from '../components/Header';
 
 // QUICK QUOTE FORM
 function QuickQuoteForm() {
@@ -128,10 +128,12 @@ function QuickQuoteForm() {
 
 export default function SalePage() {
   return (
-    <div className="min-h-screen bg-[#FFFEF7]">
+    <>
+    <Header/>
+     <div className="min-h-screen bg-[#FFFEF7]">
 
       {/* Hero Section */}
-      <section className="relative h-[50vh] bg-gradient-to-r from-[#1A237E] via-[#283593] to-[#1A237E]">
+      <section className="relative h-[70vh] bg-gradient-to-r from-[#1A237E] via-[#283593] to-[#1A237E]">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative h-full flex flex-col items-center justify-center text-white text-center px-6 z-10">
           <span className="text-5xl mb-4">🏛️</span>
@@ -382,6 +384,7 @@ export default function SalePage() {
           </div>
         </div>
       </section >
-    </div >
+     </div >
+    </>
   );
 }
