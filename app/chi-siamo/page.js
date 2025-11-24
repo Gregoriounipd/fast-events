@@ -24,7 +24,7 @@ function ContactModal({ isOpen, onClose }) {
       formDataToSend.append('entry.996676258', formData.telefono);
       formDataToSend.append('entry.417819852', formData.utente);
       formDataToSend.append('entry.1185668983', formData.tipoEvento);
-      formDataToSend.append('entry.9849905371', formData.budget);
+      formDataToSend.append('entry.984905371', formData.budget);
       formDataToSend.append('entry.811715166', formData.messaggio);
 
       await fetch(GOOGLE_FORM_URL, {

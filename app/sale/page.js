@@ -27,7 +27,7 @@ function QuickQuoteForm() {
       formDataToSend.append('entry.996676258', formData.telefono);
       formDataToSend.append('entry.417819852', formData.utente);
       formDataToSend.append('entry.1185668983', formData.tipoEvento);
-      formDataToSend.append('entry.9849905371', formData.budget);
+      formDataToSend.append('entry.984905371', formData.budget);
       formDataToSend.append('entry.811715166', formData.messaggio);
 
 
@@ -80,18 +80,6 @@ function QuickQuoteForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-slate-800 mb-2">Nome Instagram</label>
-          <input
-            type="text"
-            name="utente"
-            value={formData.utente}
-            onChange={handleChange}
-            placeholder="@tuoutente"
-            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
-          />
-        </div>
-
-        <div>
           <label className="block text-sm font-semibold text-slate-800 mb-2">Telefono</label>
           <input
             type="tel"
@@ -99,6 +87,18 @@ function QuickQuoteForm() {
             value={formData.telefono}
             onChange={handleChange}
             placeholder="+39 392 120 9212"
+            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-800 mb-2">Nome Instagram</label>
+          <input
+            type="text"
+            name="utente"
+            value={formData.utente}
+            onChange={handleChange}
+            placeholder="@tuoutente"
             className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
           />
         </div>

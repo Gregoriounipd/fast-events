@@ -139,6 +139,15 @@ function QuickQuoteForm() {
         />
 
         <input
+          type="tel"
+          name="telefono"
+          placeholder="Telefono"
+          value={formData.telefono}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+        />
+        
+        <input
           type="utente"
           name="utente"
           placeholder="Nome Instagram"
@@ -147,16 +156,7 @@ function QuickQuoteForm() {
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           required
         />
-
-        <input
-          type="tel"
-          name="telefono"
-          placeholder="Telefono"
-          value={formData.telefono}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-        />
-
+        
         <select
           name="servizio"
           value={formData.servizio}

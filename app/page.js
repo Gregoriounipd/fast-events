@@ -45,7 +45,7 @@ function ContactModal({ isOpen, onClose }) {
   const handleSubmit = async () => {
     try {
       // URL del Google Form (formResponse invece di viewform)
-      const GOOGLE_FORM_URL ='https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
 
       const formDataToSend = new FormData();
       formDataToSend.append('entry.1293752853', formData.nome);
@@ -53,7 +53,7 @@ function ContactModal({ isOpen, onClose }) {
       formDataToSend.append('entry.996676258', formData.telefono);
       formDataToSend.append('entry.417819852', formData.utente);
       formDataToSend.append('entry.1185668983', formData.tipoEvento);
-      formDataToSend.append('entry.9849905371', formData.budget);
+      formDataToSend.append('entry.984905371', formData.budget);
       formDataToSend.append('entry.811715166', formData.messaggio);
 
       // Invia a Google Forms in background
@@ -141,22 +141,6 @@ function ContactModal({ isOpen, onClose }) {
             />
           </div>
 
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-slate-800 mb-2">
-              Nome instagram *
-            </label>
-            <input
-              type="text"
-              name="utente"
-              value={formData.utente}
-              onChange={handleChange}
-              placeholder="@nomeinstagram"
-              className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
-              required
-            />
-          </div>
-
-
           {/* Telefono */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">
@@ -169,6 +153,21 @@ function ContactModal({ isOpen, onClose }) {
               onChange={handleChange}
               placeholder="il tuo numero di telefono"
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-slate-800 mb-2">
+              Nome instagram *
+            </label>
+            <input
+              type="text"
+              name="utente"
+              value={formData.utente}
+              onChange={handleChange}
+              placeholder="@nomeinstagram"
+              className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
+              required
             />
           </div>
 
