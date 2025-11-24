@@ -12,7 +12,7 @@ function QuickQuoteForm() {
     email: '',
     telefono: '',
     utente: '',
-    tipoEvento: 'Laurea',
+    tipoEvento: 'Feste di Laurea',
     numeroPartecipanti: '',
     messaggio: ''
   });
@@ -38,7 +38,7 @@ function QuickQuoteForm() {
       });
 
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
-      setFormData({ nome: '', email: '', telefono: '', tipoEvento: 'Laurea', numeroPartecipanti: '', messaggio: '' });
+      setFormData({ nome: '', email: '', telefono: '',  utente: '', tipoEvento: 'Feste di laurea', numeroPartecipanti: '', messaggio: '' });
     } catch (error) {
       alert('❌ Errore nell\'invio. Contattaci su WhatsApp: +39 392 1209 212');
     }

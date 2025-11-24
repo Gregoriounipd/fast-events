@@ -12,7 +12,7 @@ function ContactModal({ isOpen, onClose }) {
     email: '',
     telefono: '',
     utente: '',
-    tipoEvento: 'Laurea',
+    tipoEvento: 'Feste di laurea',
     budget: '',
     messaggio: ''
   });
@@ -37,7 +37,7 @@ function ContactModal({ isOpen, onClose }) {
 
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
       onClose();
-      setFormData({ nome: '', email: '', telefono: '', tipoEvento: 'Laurea', budget: '', messaggio: '' });
+      setFormData({ nome: '', email: '', telefono: '', utente:'', tipoEvento: 'Feste di laurea', budget: '', messaggio: '' });
     } catch (error) {
       alert('❌ Errore nell\'invio. Contattaci su WhatsApp: +39 389 257 4273');
     }

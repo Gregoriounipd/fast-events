@@ -99,7 +99,7 @@ function QuickQuoteForm() {
     email: '',
     telefono: '',
     utente: '',
-    servizio: '',
+    tipoEvento: 'Feste di laurea',
     messaggio: ''
   });
 

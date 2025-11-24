@@ -70,7 +70,7 @@ function ContactModal({ isOpen, onClose }) {
         nome: '',
         email: '',
         telefono: '',
-        tipoEvento: 'Laurea',
+        tipoEvento: 'Feste di laurea',
         budget: '',
         messaggio: ''
       });

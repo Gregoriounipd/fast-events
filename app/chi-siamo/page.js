@@ -17,7 +17,7 @@ function ContactModal({ isOpen, onClose }) {
 
   const handleSubmit = async () => {
     try {
-      const GOOGLE_FORM_URL ='https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
       const formDataToSend = new FormData();
       formDataToSend.append('entry.1293752853', formData.nome);
       formDataToSend.append('entry.1222330538', formData.email);
@@ -88,23 +88,23 @@ function ContactModal({ isOpen, onClose }) {
             <label className="block text-sm font-semibold text-slate-800 mb-2">Email *</label>
             <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="mario.rossi@email.com" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base" required />
           </div>
-          
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-slate-800 mb-2">Nome Instagram</label>
-            <input type="text" name="utente" value={formData.utente} onChange={handleChange} placeholder="@nomeinstagram" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base" />
-          </div>
-         
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">Telefono</label>
             <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="+39 389 257 4273" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base" />
           </div>
 
           <div className="space-y-2">
+            <label className="block text-sm font-semibold text-slate-800 mb-2">Nome Instagram</label>
+            <input type="text" name="utente" value={formData.utente} onChange={handleChange} placeholder="@nomeinstagram" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base" />
+          </div>
+
+          <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">Tipo di Evento *</label>
             <select name="tipoEvento" value={formData.tipoEvento} onChange={handleChange} className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 font-medium shadow-sm cursor-pointer text-base">
               <option value="Laurea">🎓 Festa di Laurea</option>
-              <option value="Compleanno">🎂 Compleanno</option>
-              <option value="Anniversario">💕 Anniversario</option>
+              <option value="18 esimo">🎂 18° Compleanno</option>
+              <option value="Compleanno">💕 Compleanno</option>
               <option value="Altro">🎉 Altro</option>
             </select>
           </div>
