@@ -1,15 +1,24 @@
 import './globals.css'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
-
 export const metadata = {
   title: 'Adori Events - Feste di Laurea, Compleanni e Diciottesimi',
   description: 'Organizziamo feste di laurea memorabili, compleanni indimenticabili e diciottesimi speciali. Eventi su misura in tutta Italia.',
   keywords: 'feste di laurea, compleanni, diciottesimi, eventi, organizzazione eventi, party, feste',
   authors: [{ name: 'Adori Events' }],
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-icon.png',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'icon', url: '/android-chrome-192x192.png', sizes: '192x192' },
+      { rel: 'icon', url: '/android-chrome-512x512.png', sizes: '512x512' },
+    ],
   },
   openGraph: {
     title: 'Adori Events - Organizzazione Eventi',
@@ -32,9 +41,6 @@ export const metadata = {
     title: 'Adori Events - Organizzazione Eventi',
     description: 'Feste di laurea, compleanni e diciottesimi indimenticabili',
     images: ['https://adorievents.com/og-image.jpg'],
-  },
-  verification: {
-    google: 'IL_TUO_CODICE_GOOGLE', // Lo otterrai da Google Search Console
   },
 }
 

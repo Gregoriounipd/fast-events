@@ -17,15 +17,16 @@ function ContactModal({ isOpen, onClose }) {
 
   const handleSubmit = async () => {
     try {
-      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSePasSeI0x6sb0BsNxKi8vcx1ZfMQVbCHUMsYV6y8yBvF2VDQ/formResponse';
-      
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/viewform?usp=dialog';
+
       const formDataToSend = new FormData();
-      formDataToSend.append('entry.1286963313', formData.nome);
-      formDataToSend.append('entry.1755813807', formData.email);
-      formDataToSend.append('entry.1852190146', formData.telefono);
-      formDataToSend.append('entry.33183968', formData.tipoEvento);
-      formDataToSend.append('entry.121710793', formData.budget);
-      formDataToSend.append('entry.2097799976', formData.messaggio);
+      formDataToSend.append('entry.1293752853', formData.nome);
+      formDataToSend.append('entry.1222330538', formData.email);
+      formDataToSend.append('entry.996676258', formData.telefono);
+      formDataToSend.append('entry.417819852', formData.utente);
+      formDataToSend.append('entry.1185668983', formData.tipoEvento);
+      formDataToSend.append('entry.9849905371', formData.budget);
+      formDataToSend.append('entry.811715166', formData.messaggio);
 
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
@@ -36,17 +37,17 @@ function ContactModal({ isOpen, onClose }) {
       console.log('Form inviato con successo!', formData);
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
       onClose();
-      setFormData({ 
-        nome: '', 
-        email: '', 
-        telefono: '', 
-        tipoEvento: 'Laurea', 
-        budget: '', 
-        messaggio: '' 
+      setFormData({
+        nome: '',
+        email: '',
+        telefono: '',
+        tipoEvento: 'Laurea',
+        budget: '',
+        messaggio: ''
       });
     } catch (error) {
       console.error('Errore invio:', error);
-      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 389 257 4273');
+      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 392 120 9212');
     }
   };
 
@@ -87,7 +88,12 @@ function ContactModal({ isOpen, onClose }) {
             <label className="block text-sm font-semibold text-slate-800 mb-2">Email *</label>
             <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="mario.rossi@email.com" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base" required />
           </div>
-
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-slate-800 mb-2">Nome Instagram</label>
+            <input type="text" name="utente" value={formData.utente} onChange={handleChange} placeholder="@nomeinstagram" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base" />
+          </div>
+         
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">Telefono</label>
             <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="+39 389 257 4273" className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base" />
@@ -178,18 +184,18 @@ export default function ChiSiamoPage() {
 
             <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-10 space-y-6">
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                <strong className="text-blue-900">Adori Events</strong> nasce dalla passione e dall'esperienza maturata nel mondo dell'organizzazione eventi. 
+                <strong className="text-blue-900">Adori Events</strong> nasce dalla passione e dall'esperienza maturata nel mondo dell'organizzazione eventi.
                 Siamo un team giovane e dinamico, ma con un bagaglio di competenze consolidate nel settore.
               </p>
 
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                La nostra esperienza proviene da <strong className="text-amber-700">Fast Life</strong>, realtà affermata nell'organizzazione di eventi 
-                di successo. Abbiamo portato con noi il know-how acquisito e la voglia di creare qualcosa di nuovo, 
+                La nostra esperienza proviene da <strong className="text-amber-700">Fast Life</strong>, realtà affermata nell'organizzazione di eventi
+                di successo. Abbiamo portato con noi il know-how acquisito e la voglia di creare qualcosa di nuovo,
                 mantenendo sempre al centro <em>la qualità</em> e <em>l'attenzione ai dettagli</em>.
               </p>
 
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                Oggi mettiamo a disposizione questa esperienza per realizzare i vostri eventi da sogno: 
+                Oggi mettiamo a disposizione questa esperienza per realizzare i vostri eventi da sogno:
                 feste di laurea indimenticabili, compleanni speciali, diciottesimi memorabili e molto altro.
               </p>
             </div>
@@ -286,7 +292,7 @@ export default function ChiSiamoPage() {
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-slate-800 mb-2">Esperienza Consolidata</h3>
                     <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                      Proveniamo da Fast Life, una realtà riconosciuta nel settore degli eventi. Portiamo con noi 
+                      Proveniamo da Fast Life, una realtà riconosciuta nel settore degli eventi. Portiamo con noi
                       anni di successi e la capacità di gestire ogni situazione con professionalità.
                     </p>
                   </div>
@@ -302,7 +308,7 @@ export default function ChiSiamoPage() {
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-slate-800 mb-2">Approccio Personale</h3>
                     <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                      Ogni evento è unico come le persone che lo vivono. Ascoltiamo le vostre esigenze e 
+                      Ogni evento è unico come le persone che lo vivono. Ascoltiamo le vostre esigenze e
                       creiamo soluzioni su misura per realizzare esattamente ciò che desiderate.
                     </p>
                   </div>
@@ -318,7 +324,7 @@ export default function ChiSiamoPage() {
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-slate-800 mb-2">Serenità Garantita</h3>
                     <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                      Ci occupiamo di tutto: dalla location agli allestimenti, dalla musica al catering. 
+                      Ci occupiamo di tutto: dalla location agli allestimenti, dalla musica al catering.
                       Voi dovete solo godervi il vostro momento speciale, al resto pensiamo noi.
                     </p>
                   </div>

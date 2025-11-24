@@ -98,6 +98,7 @@ function QuickQuoteForm() {
     nome: '',
     email: '',
     telefono: '',
+    utente: '',
     servizio: '',
     messaggio: ''
   });
@@ -132,6 +133,16 @@ function QuickQuoteForm() {
           name="email"
           placeholder="Email"
           value={formData.email}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          required
+        />
+
+        <input
+          type="utente"
+          name="utente"
+          placeholder="Nome Instagram"
+          value={formData.utente}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           required
