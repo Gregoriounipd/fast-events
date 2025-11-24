@@ -11,6 +11,7 @@ function ContactModal({ isOpen, onClose }) {
     nome: '',
     email: '',
     telefono: '',
+    utente: '',
     tipoEvento: 'Laurea',
     budget: '',
     messaggio: ''
@@ -18,15 +19,15 @@ function ContactModal({ isOpen, onClose }) {
 
   const handleSubmit = async () => {
     try {
-      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSePasSeI0x6sb0BsNxKi8vcx1ZfMQVbCHUMsYV6y8yBvF2VDQ/formResponse';
-      
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
       const formDataToSend = new FormData();
-      formDataToSend.append('entry.1286963313', formData.nome);
-      formDataToSend.append('entry.1755813807', formData.email);
-      formDataToSend.append('entry.1852190146', formData.telefono);
-      formDataToSend.append('entry.33183968', formData.tipoEvento);
-      formDataToSend.append('entry.121710793', formData.budget);
-      formDataToSend.append('entry.2097799976', formData.messaggio);
+      formDataToSend.append('entry.1293752853', formData.nome);
+      formDataToSend.append('entry.1222330538', formData.email);
+      formDataToSend.append('entry.996676258', formData.telefono);
+      formDataToSend.append('entry.417819852', formData.utente);
+      formDataToSend.append('entry.1185668983', formData.tipoEvento);
+      formDataToSend.append('entry.984905371', formData.budget);
+      formDataToSend.append('entry.811715166', formData.messaggio);
 
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
@@ -130,8 +131,8 @@ export default function GalleryPage() {
   ];
 
   // Filtra per categoria
-  const filteredImages = selectedCategory === 'Tutti' 
-    ? galleryImages 
+  const filteredImages = selectedCategory === 'Tutti'
+    ? galleryImages
     : galleryImages.filter(img => img.category === selectedCategory);
 
   return (
@@ -171,11 +172,10 @@ export default function GalleryPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 ${
-                    selectedCategory === cat
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 ${selectedCategory === cat
                       ? 'bg-gradient-to-r from-blue-900 to-amber-700 text-white shadow-lg scale-105'
                       : 'bg-white text-slate-700 hover:bg-slate-100 border-2 border-slate-200'
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -227,11 +227,11 @@ export default function GalleryPage() {
 
         {/* Lightbox (modale foto ingrandita) */}
         {lightboxImage && (
-          <div 
+          <div
             className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
             onClick={() => setLightboxImage(null)}
           >
-            <button 
+            <button
               className="absolute top-4 right-4 text-white text-4xl hover:text-amber-400 transition-colors"
               onClick={() => setLightboxImage(null)}
             >
