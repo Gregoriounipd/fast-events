@@ -20,8 +20,7 @@ function QuickQuoteForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/viewform?usp=dialog';
-
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
       const formDataToSend = new FormData();
       formDataToSend.append('entry.1293752853', formData.nome);
       formDataToSend.append('entry.1222330538', formData.email);

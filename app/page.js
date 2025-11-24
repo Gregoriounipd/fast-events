@@ -45,7 +45,7 @@ function ContactModal({ isOpen, onClose }) {
   const handleSubmit = async () => {
     try {
       // URL del Google Form (formResponse invece di viewform)
-      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/viewform?usp=dialog';
+      const GOOGLE_FORM_URL ='https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
 
       const formDataToSend = new FormData();
       formDataToSend.append('entry.1293752853', formData.nome);
