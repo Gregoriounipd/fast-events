@@ -30,21 +30,27 @@ const services = [
   },
 ];
 
-// FORM POPUP MOBILE-FRIENDLY CON GOOGLE FORMS
 function ContactModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
     telefono: '',
     utente: '',
-    tipoEvento: 'Laurea',
+    tipoEvento: 'Feste di laurea', // ✅ CORRETTO
     budget: '',
     messaggio: ''
   });
 
   const handleSubmit = async () => {
     try {
-      // URL del Google Form (formResponse invece di viewform)
+      // Validazione campi obbligatori
+      if (!formData.nome || !formData.email || !formData.utente) {
+        alert('⚠️ Compila tutti i campi obbligatori (Nome, Email, Instagram)');
+        return;
+      }
+
+      console.log('📤 Invio dati:', formData); // DEBUG
+
       const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
 
       const formDataToSend = new FormData();
@@ -56,26 +62,44 @@ function ContactModal({ isOpen, onClose }) {
       formDataToSend.append('entry.984905371', formData.budget);
       formDataToSend.append('entry.811715166', formData.messaggio);
 
-      // Invia a Google Forms in background
+      // Invia a Google Forms
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
         body: formDataToSend,
         mode: 'no-cors',
       });
 
-      console.log('Form inviato con successo!', formData);
+      // BACKUP LOCALE (salva per sicurezza)
+      const backupKey = `richiesta_${Date.now()}`;
+      localStorage.setItem(backupKey, JSON.stringify({
+        ...formData,
+        timestamp: new Date().toISOString()
+      }));
+
+      console.log('✅ Form inviato! Backup salvato:', backupKey);
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
+      
       onClose();
       setFormData({
         nome: '',
         email: '',
         telefono: '',
-        tipoEvento: 'Feste di laurea',
+        utente: '',
+        tipoEvento: 'Feste di laurea', // ✅ CORRETTO
         budget: '',
         messaggio: ''
       });
     } catch (error) {
-      console.error('Errore invio:', error);
+      console.error('❌ Errore invio:', error);
+      
+      // Salva backup anche in caso di errore
+      const backupKey = `richiesta_errore_${Date.now()}`;
+      localStorage.setItem(backupKey, JSON.stringify({
+        ...formData,
+        timestamp: new Date().toISOString(),
+        errore: error.message
+      }));
+      
       alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 3921209212');
     }
   };
@@ -88,7 +112,6 @@ function ContactModal({ isOpen, onClose }) {
   };
 
   if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
       <div className="bg-amber-50 rounded-xl sm:rounded-2xl max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl border border-amber-200/50">
