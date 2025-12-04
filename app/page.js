@@ -367,6 +367,8 @@ export default function Home() {
   const prevSlide = () => {
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
   };
+ // Banner di avviso tecnico (toglilo tra 7 giorni)
+
   function WarningBanner() {
     const [isVisible, setIsVisible] = useState(true);
 
@@ -383,7 +385,7 @@ export default function Home() {
                   Importante: Problema tecnico risolto!
                 </p>
                 <p className="text-xs sm:text-sm opacity-90">
-                  Se hai inviato una richiesta tra il 23 novembre e il 5 dicembre e non hai ricevuto risposta,
+                  Se hai inviato una richiesta tra il 23 novembre e il 3 dicembre e non hai ricevuto risposta,
                   <strong> per favore ricontattaci</strong> su WhatsApp:
                   <a
                     href="https://wa.me/3921209212?text=Ciao! Ho inviato una richiesta nei giorni scorsi ma non ho ricevuto risposta"
@@ -410,7 +412,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <WarningBanner />
+      <WarningBanner /> {/* rimuovi anche questo*/}
       <main className="w-full pt-16">
         {/* HERO BANNER MOBILE-FRIENDLY */}
         <section className="relative h-[70vh] sm:h-[80vh] lg:h-[90vh] w-full overflow-hidden">
