@@ -78,7 +78,7 @@ function ContactModal({ isOpen, onClose }) {
 
       console.log('✅ Form inviato! Backup salvato:', backupKey);
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
-      
+
       onClose();
       setFormData({
         nome: '',
@@ -91,7 +91,7 @@ function ContactModal({ isOpen, onClose }) {
       });
     } catch (error) {
       console.error('❌ Errore invio:', error);
-      
+
       // Salva backup anche in caso di errore
       const backupKey = `richiesta_errore_${Date.now()}`;
       localStorage.setItem(backupKey, JSON.stringify({
@@ -99,7 +99,7 @@ function ContactModal({ isOpen, onClose }) {
         timestamp: new Date().toISOString(),
         errore: error.message
       }));
-      
+
       alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 3921209212');
     }
   };
@@ -367,10 +367,50 @@ export default function Home() {
   const prevSlide = () => {
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
   };
+  function WarningBanner() {
+    const [isVisible, setIsVisible] = useState(true);
+
+    if (!isVisible) return null;
+
+    return (
+      <div className="fixed top-16 left-0 right-0 bg-gradient-to-r from-red-600 via-orange-500 to-amber-600 text-white z-40 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 flex-1">
+              <span className="text-2xl animate-pulse">⚠️</span>
+              <div className="flex-1">
+                <p className="font-bold text-sm sm:text-base">
+                  Importante: Problema tecnico risolto!
+                </p>
+                <p className="text-xs sm:text-sm opacity-90">
+                  Se hai inviato una richiesta tra il 23 novembre e il 5 dicembre e non hai ricevuto risposta,
+                  <strong> per favore ricontattaci</strong> su WhatsApp:
+                  <a
+                    href="https://wa.me/3921209212?text=Ciao! Ho inviato una richiesta nei giorni scorsi ma non ho ricevuto risposta"
+                    className="underline ml-1 hover:text-yellow-200"
+                    target="_blank"
+                  >
+                    +39 392 120 9212
+                  </a>
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsVisible(false)}
+              className="text-white/80 hover:text-white hover:bg-white/20 px-3 py-1 rounded-lg transition-all flex-shrink-0 text-xl"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
       <Header />
+      <WarningBanner />
       <main className="w-full pt-16">
         {/* HERO BANNER MOBILE-FRIENDLY */}
         <section className="relative h-[70vh] sm:h-[80vh] lg:h-[90vh] w-full overflow-hidden">
