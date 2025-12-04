@@ -92,21 +92,83 @@ const otherServices = [
   }
 ];
 
-// Form preventivo veloce
 function QuickQuoteForm() {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
     telefono: '',
     utente: '',
-    tipoEvento: 'Feste di laurea',
+    tipoEvento: 'Feste di laurea', // ✅ Deve matchare con il name del select
+    budget: '', // Aggiungi questo se serve
     messaggio: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Quick quote:', formData);
-    alert('Richiesta inviata! Ti contatteremo presto.');
+    
+    // Validazione
+    if (!formData.nome || !formData.email || !formData.utente) {
+      alert('⚠️ Compila tutti i campi obbligatori (Nome, Email, Instagram)');
+      return;
+    }
+
+    try {
+      console.log('📤 Invio quick quote:', formData);
+
+      // Invia a Google Forms (STESSO URL del form principale)
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
+
+      const formDataToSend = new FormData();
+      formDataToSend.append('entry.1293752853', formData.nome);
+      formDataToSend.append('entry.1222330538', formData.email);
+      formDataToSend.append('entry.996676258', formData.telefono);
+      formDataToSend.append('entry.417819852', formData.utente);
+      formDataToSend.append('entry.1185668983', formData.tipoEvento);
+      formDataToSend.append('entry.984905371', formData.budget || ''); // Budget opzionale
+      formDataToSend.append('entry.811715166', formData.messaggio);
+
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        body: formDataToSend,
+        mode: 'no-cors',
+      });
+
+      // BACKUP LOCALE
+      const backupKey = `richiesta_servizi_${Date.now()}`;
+      localStorage.setItem(backupKey, JSON.stringify({
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: 'pagina_servizi' // Per distinguerlo dal form homepage
+      }));
+
+      console.log('✅ Quick quote inviata! Backup:', backupKey);
+      alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
+      
+      // Reset form
+      setFormData({
+        nome: '',
+        email: '',
+        telefono: '',
+        utente: '',
+        tipoEvento: 'Feste di laurea',
+        budget: '',
+        messaggio: ''
+      });
+
+    } catch (error) {
+      console.error('❌ Errore invio quick quote:', error);
+      
+      // Backup anche in caso di errore
+      const backupKey = `richiesta_servizi_errore_${Date.now()}`;
+      localStorage.setItem(backupKey, JSON.stringify({
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: 'pagina_servizi',
+        errore: error.message
+      }));
+
+      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 3921209212');
+    }
   };
 
   const handleChange = (e) => {
@@ -117,11 +179,11 @@ function QuickQuoteForm() {
     <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
       <h3 className="text-xl font-bold mb-4 text-gray-800">Richiedi Preventivo Veloce</h3>
 
-      <div className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           name="nome"
-          placeholder="Nome e Cognome"
+          placeholder="Nome e Cognome *"
           value={formData.nome}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -131,7 +193,7 @@ function QuickQuoteForm() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Email *"
           value={formData.email}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -148,25 +210,27 @@ function QuickQuoteForm() {
         />
         
         <input
-          type="utente"
+          type="text"
           name="utente"
-          placeholder="Nome Instagram"
+          placeholder="Nome Instagram *"
           value={formData.utente}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           required
         />
         
+        {/* ✅ CORRETTO: name="tipoEvento" (non "servizio") */}
         <select
-          name="servizio"
-          value={formData.servizio}
+          name="tipoEvento"
+          value={formData.tipoEvento}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          required
         >
-          <option value="">Seleziona servizio</option>
-          <option value="feste-laurea">🎓 Feste di Laurea</option>
-          <option value="compleanni">🎂 Compleanni</option>
-          <option value="altro">🎉 Altro</option>
+          <option value="Feste di laurea">🎓 Feste di Laurea</option>
+          <option value="Compleanni">🎂 Compleanni</option>
+          <option value="18 esimo">🎉 18° Compleanno</option>
+          <option value="Altro">✨ Altro</option>
         </select>
 
         <textarea
@@ -179,12 +243,12 @@ function QuickQuoteForm() {
         />
 
         <button
-          onClick={handleSubmit}
+          type="submit"
           className="w-full py-4 bg-gradient-to-r from-blue-900 via-blue-800 to-amber-700 text-white font-semibold rounded-xl hover:from-blue-950 hover:to-amber-800 transition-all duration-300 shadow-lg hover:shadow-xl"
         >
-          Invia Richiesta
+          Invia Richiesta ✨
         </button>
-      </div>
+      </form>
     </div>
   );
 }

@@ -5,31 +5,40 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Header from '../components/Header';
 
-// QUICK QUOTE FORM
 function QuickQuoteForm() {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
     telefono: '',
     utente: '',
-    tipoEvento: 'Feste di Laurea',
-    numeroPartecipanti: '',
+    tipoEvento: 'Feste di laurea', // ✅ Deve matchare con il name del select
+    budget: '', // Aggiungi questo se serve
     messaggio: ''
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validazione
+    if (!formData.nome || !formData.email || !formData.utente) {
+      alert('⚠️ Compila tutti i campi obbligatori (Nome, Email, Instagram)');
+      return;
+    }
+
     try {
+      console.log('📤 Invio quick quote:', formData);
+
+      // Invia a Google Forms (STESSO URL del form principale)
       const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
+
       const formDataToSend = new FormData();
       formDataToSend.append('entry.1293752853', formData.nome);
       formDataToSend.append('entry.1222330538', formData.email);
       formDataToSend.append('entry.996676258', formData.telefono);
       formDataToSend.append('entry.417819852', formData.utente);
       formDataToSend.append('entry.1185668983', formData.tipoEvento);
-      formDataToSend.append('entry.984905371', formData.budget);
+      formDataToSend.append('entry.984905371', formData.budget || ''); // Budget opzionale
       formDataToSend.append('entry.811715166', formData.messaggio);
-
 
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
@@ -37,10 +46,41 @@ function QuickQuoteForm() {
         mode: 'no-cors',
       });
 
+      // BACKUP LOCALE
+      const backupKey = `richiesta_servizi_${Date.now()}`;
+      localStorage.setItem(backupKey, JSON.stringify({
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: 'pagina_servizi' // Per distinguerlo dal form homepage
+      }));
+
+      console.log('✅ Quick quote inviata! Backup:', backupKey);
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
-      setFormData({ nome: '', email: '', telefono: '',  utente: '', tipoEvento: 'Feste di laurea', numeroPartecipanti: '', messaggio: '' });
+
+      // Reset form
+      setFormData({
+        nome: '',
+        email: '',
+        telefono: '',
+        utente: '',
+        tipoEvento: 'Feste di laurea',
+        budget: '',
+        messaggio: ''
+      });
+
     } catch (error) {
-      alert('❌ Errore nell\'invio. Contattaci su WhatsApp: +39 392 1209 212');
+      console.error('❌ Errore invio quick quote:', error);
+
+      // Backup anche in caso di errore
+      const backupKey = `richiesta_servizi_errore_${Date.now()}`;
+      localStorage.setItem(backupKey, JSON.stringify({
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: 'pagina_servizi',
+        errore: error.message
+      }));
+
+      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 3921209212');
     }
   };
 
@@ -49,86 +89,71 @@ function QuickQuoteForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-amber-200">
-      <h3 className="text-2xl font-bold text-slate-900 mb-6">Richiedi Info Rapide</h3>
+    <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+      <h3 className="text-xl font-bold mb-4 text-gray-800">Richiedi Preventivo Veloce</h3>
 
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-semibold text-slate-800 mb-2">Nome *</label>
-          <input
-            type="text"
-            name="nome"
-            value={formData.nome}
-            onChange={handleChange}
-            placeholder="Il tuo nome"
-            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
-            required
-          />
-        </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          name="nome"
+          placeholder="Nome e Cognome *"
+          value={formData.nome}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          required
+        />
 
-        <div>
-          <label className="block text-sm font-semibold text-slate-800 mb-2">Email *</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="tua@email.com"
-            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
-            required
-          />
-        </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email *"
+          value={formData.email}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          required
+        />
 
-        <div>
-          <label className="block text-sm font-semibold text-slate-800 mb-2">Telefono</label>
-          <input
-            type="tel"
-            name="telefono"
-            value={formData.telefono}
-            onChange={handleChange}
-            placeholder="+39 392 120 9212"
-            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
-          />
-        </div>
+        <input
+          type="tel"
+          name="telefono"
+          placeholder="Telefono"
+          value={formData.telefono}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+        />
 
-        <div>
-          <label className="block text-sm font-semibold text-slate-800 mb-2">Nome Instagram</label>
-          <input
-            type="text"
-            name="utente"
-            value={formData.utente}
-            onChange={handleChange}
-            placeholder="@tuoutente"
-            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
-          />
-        </div>
+        <input
+          type="text"
+          name="utente"
+          placeholder="Nome Instagram *"
+          value={formData.utente}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          required
+        />
 
-        <div>
-          <label className="block text-sm font-semibold text-slate-800 mb-2">Tipo Evento *</label>
-          <select
-            name="tipoEvento"
-            value={formData.tipoEvento}
-            onChange={handleChange}
-            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800"
-          >
-            <option value="Laurea">🎓 Festa di Laurea</option>
-            <option value="Compleanno">🎂 Compleanno</option>
-            <option value="Diciottesimo">🎉 Diciottesimo</option>
-            <option value="Altro">✨ Altro</option>
-          </select>
-        </div>
+        {/* ✅ CORRETTO: name="tipoEvento" (non "servizio") */}
+        <select
+          name="tipoEvento"
+          value={formData.tipoEvento}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          required
+        >
+          <option value="Feste di laurea">🎓 Feste di Laurea</option>
+          <option value="Compleanni">🎂 Compleanni</option>
+          <option value="18 esimo">🎉 18° Compleanno</option>
+          <option value="Altro">✨ Altro</option>
+        </select>
 
-        <div>
-          <label className="block text-sm font-semibold text-slate-800 mb-2">Messaggio</label>
-          <textarea
-            name="messaggio"
-            value={formData.messaggio}
-            onChange={handleChange}
-            placeholder="Raccontaci brevemente cosa hai in mente..."
-            rows="3"
-            className="w-full p-3 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 bg-white text-slate-800 resize-none"
-          ></textarea>
-        </div>
+        <textarea
+          name="messaggio"
+          placeholder="Descrivi il tuo evento..."
+          rows="3"
+          value={formData.messaggio}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+        />
 
         <button
           type="submit"
@@ -136,8 +161,8 @@ function QuickQuoteForm() {
         >
           Invia Richiesta ✨
         </button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 
