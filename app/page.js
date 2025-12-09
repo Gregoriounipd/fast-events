@@ -38,97 +38,105 @@ function ContactModal({ isOpen, onClose }) {
     utente: '',
     tipoEvento: 'Feste di laurea', // ✅ CORRETTO
     budget: '',
-    messaggio: ''
+    messaggio: '',
+    privacy: false
   });
 
- const handleSubmit = async () => {
-  try {
-    // Validazione SOLO campi veramente obbligatori
-    if (!formData.nome || !formData.email || !formData.utente) {
-      alert('⚠️ Compila almeno: Nome, Email e Instagram');
-      return;
-    }
-
-    console.log('📤 Invio dati:', formData);
-
-    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
-
-    const formDataToSend = new FormData();
-    
-    // ✅ SEMPRE invia tutti i campi, anche se vuoti
-    formDataToSend.append('entry.1293752853', formData.nome || '');
-    formDataToSend.append('entry.1222330538', formData.email || '');
-    formDataToSend.append('entry.996676258', formData.telefono || ''); // Opzionale
-    formDataToSend.append('entry.417819852', formData.utente || '');
-    formDataToSend.append('entry.1185668983', formData.tipoEvento || 'Altro');
-    formDataToSend.append('entry.984905371', formData.budget || ''); // Opzionale
-    formDataToSend.append('entry.811715166', formData.messaggio || ''); // ✅ Anche se vuoto!
-
-    console.log('📡 Invio a Google Forms...');
-
-    // Invia con timeout per evitare hang
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 sec timeout
-
-    await fetch(GOOGLE_FORM_URL, {
-      method: 'POST',
-      body: formDataToSend,
-      mode: 'no-cors',
-      signal: controller.signal
-    }).catch(err => {
-      // no-cors può dare errore anche se funziona
-      console.log('⚠️ Fetch completato (no-cors)');
-    });
-
-    clearTimeout(timeoutId);
-
-    // BACKUP LOCALE (SEMPRE, anche se Google Forms fallisce)
-    const backupKey = `richiesta_${Date.now()}`;
-    const backupData = {
-      ...formData,
-      timestamp: new Date().toISOString(),
-      // Aggiungi info su quali campi erano vuoti
-      campiVuoti: {
-        telefono: !formData.telefono,
-        budget: !formData.budget,
-        messaggio: !formData.messaggio
+  const handleSubmit = async () => {
+    try {
+      // Validazione SOLO campi veramente obbligatori
+      if (!formData.nome) {
+        alert('⚠️ Inserisci almeno il tuo nome!');
+        return;
       }
-    };
-    
-    localStorage.setItem(backupKey, JSON.stringify(backupData));
 
-    console.log('✅ Backup salvato:', backupKey);
-    console.log('📊 Dati backup:', backupData);
+      if (!formData.privacy) {
+        alert('⚠️ Devi accettare la privacy policy per continuare');
+        return;
+      }
 
-    alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
-    
-    onClose();
-    setFormData({
-      nome: '',
-      email: '',
-      telefono: '',
-      utente: '',
-      tipoEvento: 'Feste di laurea',
-      budget: '',
-      messaggio: ''
-    });
+      console.log('📤 Invio dati:', formData);
 
-  } catch (error) {
-    console.error('❌ Errore:', error);
-    
-    // SALVA COMUNQUE IL BACKUP
-    const backupKey = `richiesta_errore_${Date.now()}`;
-    localStorage.setItem(backupKey, JSON.stringify({
-      ...formData,
-      timestamp: new Date().toISOString(),
-      errore: error.message
-    }));
 
-    console.log('💾 Backup errore salvato:', backupKey);
-    
-    alert('⚠️ Possibile problema di invio.\n\nI tuoi dati sono stati salvati in backup.\n\nPer sicurezza, contattaci anche su WhatsApp: +39 3921209212');
-  }
-};
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
+
+      const formDataToSend = new FormData();
+
+      // ✅ SEMPRE invia tutti i campi, anche se vuoti
+      formDataToSend.append('entry.1293752853', formData.nome || '');
+      formDataToSend.append('entry.1222330538', formData.email || '');
+      formDataToSend.append('entry.996676258', formData.telefono || ''); // Opzionale
+      formDataToSend.append('entry.417819852', formData.utente || '');
+      formDataToSend.append('entry.1185668983', formData.tipoEvento || 'Altro');
+      formDataToSend.append('entry.984905371', formData.budget || ''); // Opzionale
+      formDataToSend.append('entry.811715166', formData.messaggio || ''); // ✅ Anche se vuoto!
+
+      console.log('📡 Invio a Google Forms...');
+
+      // Invia con timeout per evitare hang
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 sec timeout
+
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        body: formDataToSend,
+        mode: 'no-cors',
+        signal: controller.signal
+      }).catch(err => {
+        // no-cors può dare errore anche se funziona
+        console.log('⚠️ Fetch completato (no-cors)');
+      });
+
+      clearTimeout(timeoutId);
+
+      // BACKUP LOCALE (SEMPRE, anche se Google Forms fallisce)
+      const backupKey = `richiesta_${Date.now()}`;
+      const backupData = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        // Aggiungi info su quali campi erano vuoti
+        campiVuoti: {
+          telefono: !formData.telefono,
+          budget: !formData.budget,
+          messaggio: !formData.messaggio
+        }
+      };
+
+      localStorage.setItem(backupKey, JSON.stringify(backupData));
+
+      console.log('✅ Backup salvato:', backupKey);
+      console.log('📊 Dati backup:', backupData);
+
+      alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
+
+      onClose();
+      setFormData({
+        nome: '',
+        email: '',
+        telefono: '',
+        utente: '',
+        tipoEvento: 'Feste di laurea',
+        budget: '',
+        messaggio: '',
+        privacy: false
+      });
+
+    } catch (error) {
+      console.error('❌ Errore:', error);
+
+      // SALVA COMUNQUE IL BACKUP
+      const backupKey = `richiesta_errore_${Date.now()}`;
+      localStorage.setItem(backupKey, JSON.stringify({
+        ...formData,
+        timestamp: new Date().toISOString(),
+        errore: error.message
+      }));
+
+      console.log('💾 Backup errore salvato:', backupKey);
+
+      alert('⚠️ Possibile problema di invio.\n\nI tuoi dati sono stati salvati in backup.\n\nPer sicurezza, contattaci anche su WhatsApp: +39 3921209212');
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -176,7 +184,7 @@ function ContactModal({ isOpen, onClose }) {
           {/* Email */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">
-              Email *
+              Email
             </label>
             <input
               type="email"
@@ -228,7 +236,7 @@ function ContactModal({ isOpen, onClose }) {
               onChange={handleChange}
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 font-medium shadow-sm cursor-pointer text-base"
             >
-              <option value="Laurea">🎓 Festa di Laurea</option>
+              <option value="Feste di laurea">🎓 Festa di Laurea</option>
               <option value="Compleanno">🎂 Compleanno</option>
               <option value="Altro">🎉 Altro</option>
             </select>
@@ -264,12 +272,13 @@ function ContactModal({ isOpen, onClose }) {
             ></textarea>
           </div>
 
-          {/* Privacy */}
+          {/* Privacy - SENZA required */}
           <div className="bg-gradient-to-r from-blue-50 to-amber-50 p-3 sm:p-4 rounded-xl border border-blue-200">
             <label className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-slate-700 cursor-pointer">
               <input
                 type="checkbox"
-                required
+                checked={formData.privacy}
+                onChange={(e) => setFormData({ ...formData, privacy: e.target.checked })}
                 className="mt-0.5 sm:mt-1 w-4 h-4 text-blue-900 border-2 border-slate-300 rounded focus:ring-blue-900 focus:ring-2 flex-shrink-0"
               />
               <span>
@@ -390,7 +399,7 @@ export default function Home() {
   const prevSlide = () => {
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
   };
- // Banner di avviso tecnico (toglilo tra 7 giorni)
+  // Banner di avviso tecnico (toglilo tra 7 giorni)
 
   function WarningBanner() {
     const [isVisible, setIsVisible] = useState(true);
