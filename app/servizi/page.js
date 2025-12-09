@@ -103,48 +103,68 @@ function QuickQuoteForm() {
     messaggio: ''
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Validazione
-    if (!formData.nome || !formData.email || !formData.utente) {
-      alert('⚠️ Compila tutti i campi obbligatori (Nome, Email, Instagram)');
-      return;
-    }
-
+  const handleSubmit = async () => {
     try {
-      console.log('📤 Invio quick quote:', formData);
+      // Validazione SOLO campi veramente obbligatori
+      if (!formData.nome || !formData.email || !formData.utente) {
+        alert('⚠️ Compila almeno: Nome, Email e Instagram');
+        return;
+      }
 
-      // Invia a Google Forms (STESSO URL del form principale)
+      console.log('📤 Invio dati:', formData);
+
       const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
 
       const formDataToSend = new FormData();
-      formDataToSend.append('entry.1293752853', formData.nome);
-      formDataToSend.append('entry.1222330538', formData.email);
-      formDataToSend.append('entry.996676258', formData.telefono);
-      formDataToSend.append('entry.417819852', formData.utente);
-      formDataToSend.append('entry.1185668983', formData.tipoEvento);
-      formDataToSend.append('entry.984905371', formData.budget || ''); // Budget opzionale
-      formDataToSend.append('entry.811715166', formData.messaggio);
+
+      // ✅ SEMPRE invia tutti i campi, anche se vuoti
+      formDataToSend.append('entry.1293752853', formData.nome || '');
+      formDataToSend.append('entry.1222330538', formData.email || '');
+      formDataToSend.append('entry.996676258', formData.telefono || ''); // Opzionale
+      formDataToSend.append('entry.417819852', formData.utente || '');
+      formDataToSend.append('entry.1185668983', formData.tipoEvento || 'Altro');
+      formDataToSend.append('entry.984905371', formData.budget || ''); // Opzionale
+      formDataToSend.append('entry.811715166', formData.messaggio || ''); // ✅ Anche se vuoto!
+
+      console.log('📡 Invio a Google Forms...');
+
+      // Invia con timeout per evitare hang
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 sec timeout
 
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
         body: formDataToSend,
         mode: 'no-cors',
+        signal: controller.signal
+      }).catch(err => {
+        // no-cors può dare errore anche se funziona
+        console.log('⚠️ Fetch completato (no-cors)');
       });
 
-      // BACKUP LOCALE
-      const backupKey = `richiesta_servizi_${Date.now()}`;
-      localStorage.setItem(backupKey, JSON.stringify({
+      clearTimeout(timeoutId);
+
+      // BACKUP LOCALE (SEMPRE, anche se Google Forms fallisce)
+      const backupKey = `richiesta_${Date.now()}`;
+      const backupData = {
         ...formData,
         timestamp: new Date().toISOString(),
-        source: 'pagina_servizi' // Per distinguerlo dal form homepage
-      }));
+        // Aggiungi info su quali campi erano vuoti
+        campiVuoti: {
+          telefono: !formData.telefono,
+          budget: !formData.budget,
+          messaggio: !formData.messaggio
+        }
+      };
 
-      console.log('✅ Quick quote inviata! Backup:', backupKey);
+      localStorage.setItem(backupKey, JSON.stringify(backupData));
+
+      console.log('✅ Backup salvato:', backupKey);
+      console.log('📊 Dati backup:', backupData);
+
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
-      
-      // Reset form
+
+      onClose();
       setFormData({
         nome: '',
         email: '',
@@ -156,21 +176,22 @@ function QuickQuoteForm() {
       });
 
     } catch (error) {
-      console.error('❌ Errore invio quick quote:', error);
-      
-      // Backup anche in caso di errore
-      const backupKey = `richiesta_servizi_errore_${Date.now()}`;
+      console.error('❌ Errore:', error);
+
+      // SALVA COMUNQUE IL BACKUP
+      const backupKey = `richiesta_errore_${Date.now()}`;
       localStorage.setItem(backupKey, JSON.stringify({
         ...formData,
         timestamp: new Date().toISOString(),
-        source: 'pagina_servizi',
         errore: error.message
       }));
 
-      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 3921209212');
+      console.log('💾 Backup errore salvato:', backupKey);
+
+      alert('⚠️ Possibile problema di invio.\n\nI tuoi dati sono stati salvati in backup.\n\nPer sicurezza, contattaci anche su WhatsApp: +39 3921209212');
     }
   };
-
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -208,7 +229,7 @@ function QuickQuoteForm() {
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
         />
-        
+
         <input
           type="text"
           name="utente"
@@ -218,7 +239,7 @@ function QuickQuoteForm() {
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           required
         />
-        
+
         {/* ✅ CORRETTO: name="tipoEvento" (non "servizio") */}
         <select
           name="tipoEvento"
