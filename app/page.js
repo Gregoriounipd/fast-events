@@ -41,7 +41,7 @@ function ContactModal({ isOpen, onClose }) {
     messaggio: ''
   });
 
-  const handleSubmit = async () => {
+ const handleSubmit = async () => {
   try {
     // Validazione SOLO campi veramente obbligatori
     if (!formData.nome || !formData.email || !formData.utente) {
@@ -129,6 +129,13 @@ function ContactModal({ isOpen, onClose }) {
     alert('⚠️ Possibile problema di invio.\n\nI tuoi dati sono stati salvati in backup.\n\nPer sicurezza, contattaci anche su WhatsApp: +39 3921209212');
   }
 };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   if (!isOpen) return null;
   return (
