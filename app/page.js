@@ -170,7 +170,6 @@ function ContactModal({ isOpen, onClose }) {
               onChange={handleChange}
               placeholder="Mario Rossi"
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
-              required
             />
           </div>
 
@@ -186,7 +185,6 @@ function ContactModal({ isOpen, onClose }) {
               onChange={handleChange}
               placeholder="mario.rossi@email.com"
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
-              required
             />
           </div>
 
@@ -216,7 +214,6 @@ function ContactModal({ isOpen, onClose }) {
               onChange={handleChange}
               placeholder="@nomeinstagram"
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
-              required
             />
           </div>
 
