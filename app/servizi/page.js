@@ -98,39 +98,44 @@ function QuickQuoteForm() {
     email: '',
     telefono: '',
     utente: '',
-    tipoEvento: 'Feste di laurea', // ✅ Deve matchare con il name del select
-    budget: '', // Aggiungi questo se serve
-    messaggio: ''
+    tipoEvento: '', // ✅ Stringa vuota - il cliente scrive quello che vuole
+    budget: '',
+    messaggio: '',
+    privacy: false // ✅ Aggiungi anche qui la privacy
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // ✅ Previeni reload pagina
+    
     try {
-      // Validazione SOLO campi veramente obbligatori
-      if (!formData.nome || !formData.email || !formData.utente) {
-        alert('⚠️ Compila almeno: Nome, Email e Instagram');
+      // Validazione SOLO nome
+      if (!formData.nome || formData.nome.trim() === '') {
+        alert('⚠️ Inserisci almeno il tuo nome!');
         return;
       }
 
-      console.log('📤 Invio dati:', formData);
+      if (!formData.privacy) {
+        alert('⚠️ Devi accettare la privacy policy per continuare');
+        return;
+      }
+
+      console.log('📤 Invio quick quote:', formData);
 
       const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
 
       const formDataToSend = new FormData();
-
-      // ✅ SEMPRE invia tutti i campi, anche se vuoti
       formDataToSend.append('entry.1293752853', formData.nome || '');
       formDataToSend.append('entry.1222330538', formData.email || '');
-      formDataToSend.append('entry.996676258', formData.telefono || ''); // Opzionale
+      formDataToSend.append('entry.996676258', formData.telefono || '');
       formDataToSend.append('entry.417819852', formData.utente || '');
-      formDataToSend.append('entry.1185668983', formData.tipoEvento || 'Altro');
-      formDataToSend.append('entry.984905371', formData.budget || ''); // Opzionale
-      formDataToSend.append('entry.811715166', formData.messaggio || ''); // ✅ Anche se vuoto!
+      formDataToSend.append('entry.1185668983', formData.tipoEvento || ''); // ✅ Text libero
+      formDataToSend.append('entry.984905371', formData.budget || '');
+      formDataToSend.append('entry.811715166', formData.messaggio || '');
 
       console.log('📡 Invio a Google Forms...');
 
-      // Invia con timeout per evitare hang
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 sec timeout
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
 
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
@@ -138,20 +143,21 @@ function QuickQuoteForm() {
         mode: 'no-cors',
         signal: controller.signal
       }).catch(err => {
-        // no-cors può dare errore anche se funziona
         console.log('⚠️ Fetch completato (no-cors)');
       });
 
       clearTimeout(timeoutId);
 
-      // BACKUP LOCALE (SEMPRE, anche se Google Forms fallisce)
-      const backupKey = `richiesta_${Date.now()}`;
+      // BACKUP LOCALE
+      const backupKey = `richiesta_servizi_${Date.now()}`;
       const backupData = {
         ...formData,
         timestamp: new Date().toISOString(),
-        // Aggiungi info su quali campi erano vuoti
+        source: 'pagina_servizi',
         campiVuoti: {
+          email: !formData.email,
           telefono: !formData.telefono,
+          utente: !formData.utente,
           budget: !formData.budget,
           messaggio: !formData.messaggio
         }
@@ -160,38 +166,38 @@ function QuickQuoteForm() {
       localStorage.setItem(backupKey, JSON.stringify(backupData));
 
       console.log('✅ Backup salvato:', backupKey);
-      console.log('📊 Dati backup:', backupData);
 
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
 
-      onClose();
+      // Reset form
       setFormData({
         nome: '',
         email: '',
         telefono: '',
         utente: '',
-        tipoEvento: 'Feste di laurea',
+        tipoEvento: '',
         budget: '',
-        messaggio: ''
+        messaggio: '',
+        privacy: false
       });
 
     } catch (error) {
-      console.error('❌ Errore:', error);
+      console.error('❌ Errore quick quote:', error);
 
-      // SALVA COMUNQUE IL BACKUP
-      const backupKey = `richiesta_errore_${Date.now()}`;
+      const backupKey = `richiesta_servizi_errore_${Date.now()}`;
       localStorage.setItem(backupKey, JSON.stringify({
         ...formData,
         timestamp: new Date().toISOString(),
+        source: 'pagina_servizi',
         errore: error.message
       }));
 
       console.log('💾 Backup errore salvato:', backupKey);
 
-      alert('⚠️ Possibile problema di invio.\n\nI tuoi dati sono stati salvati in backup.\n\nPer sicurezza, contattaci anche su WhatsApp: +39 3921209212');
+      alert('⚠️ Possibile problema di invio.\n\nPer sicurezza, contattaci anche su WhatsApp: +39 3921209212');
     }
   };
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -208,17 +214,15 @@ function QuickQuoteForm() {
           value={formData.nome}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-          required
         />
 
         <input
           type="email"
           name="email"
-          placeholder="Email *"
+          placeholder="Email"
           value={formData.email}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-          required
         />
 
         <input
@@ -233,26 +237,21 @@ function QuickQuoteForm() {
         <input
           type="text"
           name="utente"
-          placeholder="Nome Instagram *"
+          placeholder="Nome Instagram"
           value={formData.utente}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-          required
         />
 
-        {/* ✅ CORRETTO: name="tipoEvento" (non "servizio") */}
-        <select
+        {/* ✅ CAMPO TEXT invece di SELECT */}
+        <input
+          type="text"
           name="tipoEvento"
+          placeholder="Tipo di evento (es: Festa di Laurea, Compleanno, 18esimo...)"
           value={formData.tipoEvento}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-          required
-        >
-          <option value="Feste di laurea">🎓 Feste di Laurea</option>
-          <option value="Compleanni">🎂 Compleanni</option>
-          <option value="18 esimo">🎉 18° Compleanno</option>
-          <option value="Altro">✨ Altro</option>
-        </select>
+        />
 
         <textarea
           name="messaggio"
@@ -262,6 +261,21 @@ function QuickQuoteForm() {
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
         />
+
+        {/* Privacy checkbox */}
+        <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+          <label className="flex items-start gap-2 text-xs text-gray-700 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={formData.privacy}
+              onChange={(e) => setFormData({ ...formData, privacy: e.target.checked })}
+              className="mt-0.5 w-4 h-4 text-blue-900 border-2 border-gray-300 rounded focus:ring-blue-900 focus:ring-2 flex-shrink-0"
+            />
+            <span>
+              Accetto il trattamento dei dati personali secondo la Privacy Policy.
+            </span>
+          </label>
+        </div>
 
         <button
           type="submit"

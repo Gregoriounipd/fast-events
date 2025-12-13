@@ -36,7 +36,7 @@ function ContactModal({ isOpen, onClose }) {
     email: '',
     telefono: '',
     utente: '',
-    tipoEvento: 'Feste di laurea', // ✅ CORRETTO
+    tipoEvento: '', // ✅ Vuoto inizialmente
     budget: '',
     messaggio: '',
     privacy: false
@@ -63,13 +63,13 @@ function ContactModal({ isOpen, onClose }) {
       const formDataToSend = new FormData();
 
       // ✅ SEMPRE invia tutti i campi, anche se vuoti
-      formDataToSend.append('entry.1293752853', formData.nome || '');
-      formDataToSend.append('entry.1222330538', formData.email || '');
-      formDataToSend.append('entry.996676258', formData.telefono || ''); // Opzionale
-      formDataToSend.append('entry.417819852', formData.utente || '');
-      formDataToSend.append('entry.1185668983', formData.tipoEvento || 'Altro');
-      formDataToSend.append('entry.984905371', formData.budget || ''); // Opzionale
-      formDataToSend.append('entry.811715166', formData.messaggio || ''); // ✅ Anche se vuoto!
+      formDataToSend.append('entry.1293752853', formData.nome || '');        // Nome
+      formDataToSend.append('entry.1222330538', formData.email || '');       // Email
+      formDataToSend.append('entry.996676258', formData.telefono || '');     // Telefono
+      formDataToSend.append('entry.417819852', formData.utente || '');       // Instagram
+      formDataToSend.append('entry.1185668983', formData.tipoEvento || '');  // Tipo Evento (TEXT!)
+      formDataToSend.append('entry.984905371', formData.budget || '');       // Budget
+      formDataToSend.append('entry.811715166', formData.messaggio || '');    // Messaggio
 
       console.log('📡 Invio a Google Forms...');
 
@@ -109,13 +109,13 @@ function ContactModal({ isOpen, onClose }) {
 
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
 
-      onClose();
+     // Reset form
       setFormData({
         nome: '',
         email: '',
         telefono: '',
         utente: '',
-        tipoEvento: 'Feste di laurea',
+        tipoEvento: '',
         budget: '',
         messaggio: '',
         privacy: false
@@ -224,24 +224,21 @@ function ContactModal({ isOpen, onClose }) {
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
             />
           </div>
-
-          {/* Select Tipo Evento */}
+            {
+            /* Tipo di Evento */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Tipo di Evento *
             </label>
-            <select
-              name="tipoEvento"
-              value={formData.tipoEvento}
-              onChange={handleChange}
-              className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 font-medium shadow-sm cursor-pointer text-base"
-            >
-              <option value="Feste di laurea">🎓 Festa di Laurea</option>
-              <option value="Compleanno">🎂 Compleanno</option>
-              <option value="Altro">🎉 Altro</option>
-            </select>
-          </div>
-
+          <input
+            type="text"
+            name="tipoEvento"
+            value={formData.tipoEvento}
+            onChange={handleChange}
+            placeholder="Es: Festa di Laurea, Compleanno, 18esimo..."
+            className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
+          />
+</div>
           {/* Budget */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">
