@@ -109,7 +109,7 @@ function ContactModal({ isOpen, onClose }) {
 
       alert('✅ Richiesta inviata! Ti contatteremo entro 24 ore.');
 
-     // Reset form
+      // Reset form
       setFormData({
         nome: '',
         email: '',
@@ -224,21 +224,20 @@ function ContactModal({ isOpen, onClose }) {
               className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
             />
           </div>
-            {
-            /* Tipo di Evento */}
+          { /* Tipo di Evento */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Tipo di Evento *
             </label>
-          <input
-            type="text"
-            name="tipoEvento"
-            value={formData.tipoEvento}
-            onChange={handleChange}
-            placeholder="Es: Festa di Laurea, Compleanno, 18esimo..."
-            className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
-          />
-</div>
+            <input
+              type="text"
+              name="tipoEvento"
+              value={formData.tipoEvento}
+              onChange={handleChange}
+              placeholder="Es: Festa di Laurea, Compleanno, 18esimo..."
+              className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
+            />
+          </div>
           {/* Budget */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-800 mb-2">

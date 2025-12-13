@@ -11,7 +11,7 @@ function QuickQuoteForm() {
     email: '',
     telefono: '',
     utente: '',
-    tipoEvento: 'Feste di laurea', // ✅ Deve matchare con il name del select
+    tipoEvento: '', // ✅ Deve matchare con il name del select
     budget: '', // Aggiungi questo se serve
     messaggio: ''
   });
@@ -32,13 +32,14 @@ function QuickQuoteForm() {
       const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdlZEv6k-vgrV3yVwZsaIiLUYqwLsffPrPASZqmAXzn090Ukw/formResponse';
 
       const formDataToSend = new FormData();
-      formDataToSend.append('entry.1293752853', formData.nome);
-      formDataToSend.append('entry.1222330538', formData.email);
-      formDataToSend.append('entry.996676258', formData.telefono);
-      formDataToSend.append('entry.417819852', formData.utente);
-      formDataToSend.append('entry.1185668983', formData.tipoEvento);
-      formDataToSend.append('entry.984905371', formData.budget || ''); // Budget opzionale
-      formDataToSend.append('entry.811715166', formData.messaggio);
+      formDataToSend.append('entry.1293752853', formData.nome || '');
+      formDataToSend.append('entry.1222330538', formData.email || '');
+      formDataToSend.append('entry.996676258', formData.telefono || '');
+      formDataToSend.append('entry.417819852', formData.utente || '');
+      formDataToSend.append('entry.1185668983', formData.tipoEvento || ''); // ✅ Text libero
+      formDataToSend.append('entry.984905371', formData.budget || '');
+      formDataToSend.append('entry.811715166', formData.messaggio || '');
+
 
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
@@ -63,7 +64,7 @@ function QuickQuoteForm() {
         email: '',
         telefono: '',
         utente: '',
-        tipoEvento: 'Feste di laurea',
+        tipoEvento: '',
         budget: '',
         messaggio: ''
       });
@@ -132,19 +133,15 @@ function QuickQuoteForm() {
           required
         />
 
-        {/* ✅ CORRETTO: name="tipoEvento" (non "servizio") */}
-        <select
-          name="tipoEvento"
-          value={formData.tipoEvento}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-          required
-        >
-          <option value="Feste di laurea">🎓 Feste di Laurea</option>
-          <option value="Compleanni">🎂 Compleanni</option>
-          <option value="18 esimo">🎉 18° Compleanno</option>
-          <option value="Altro">✨ Altro</option>
-        </select>
+        { /* Tipo di Evento */} 
+            <input
+              type="text"
+              name="tipoEvento"
+              value={formData.tipoEvento}
+              onChange={handleChange}
+              placeholder="Es: Festa di Laurea, Compleanno, 18esimo..."
+              className="w-full p-3 sm:p-4 border-2 border-amber-200 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all duration-200 bg-white hover:bg-amber-50/50 text-slate-800 placeholder-slate-400 text-base"
+            />
 
         <textarea
           name="messaggio"
