@@ -34,7 +34,7 @@ const PrivacyPolicy = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-12 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-12">
+        <div className="bg-gradient-to-r from-blue-900 to-amber-700 text-white px-8 py-12">
           <h1 className="text-4xl font-bold mb-3">Privacy Policy</h1>
           <p className="text-xl opacity-90">Adori Events</p>
           <p className="text-sm mt-2 opacity-75">Ultimo aggiornamento: 24 dicembre 2025</p>
@@ -47,15 +47,15 @@ const PrivacyPolicy = () => {
               <p className="font-semibold text-lg text-purple-600">Adori Events</p>
               <div className="flex items-start gap-2 text-gray-700">
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
-                <span>[Inserire indirizzo completo]</span>
+                <span>[via Giovanni XXIII, 14 Vigodarzere PD ]</span>
               </div>
               <div className="flex items-center gap-2 text-gray-700">
                 <Mail size={18} className="flex-shrink-0" />
-                <span>[inserire email]</span>
+                <span>[assistenza.adorievents@gmail.com]</span>
               </div>
               <div className="flex items-center gap-2 text-gray-700">
                 <Phone size={18} className="flex-shrink-0" />
-                <span>[inserire numero]</span>
+                <span>[392 1209212]</span>
               </div>
               <p className="text-gray-700">Partita IVA: [Inserire P.IVA]</p>
             </div>
@@ -219,15 +219,15 @@ const PrivacyPolicy = () => {
             <div className="space-y-2 text-gray-700">
               <div className="flex items-center gap-2">
                 <Mail size={18} className="text-purple-600" />
-                <span>[inserire email privacy]</span>
+                <span>[assistenza.adorievents@gmail.com]</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={18} className="text-purple-600" />
-                <span>[inserire numero]</span>
+                <span>[392 1209212]</span>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin size={18} className="text-purple-600 mt-1" />
-                <span>[inserire indirizzo]</span>
+                <span>[Via giovanni XXIII, 14 Vigodarzere PD]</span>
               </div>
             </div>
             <p className="mt-6 text-center text-sm text-gray-500 italic">
