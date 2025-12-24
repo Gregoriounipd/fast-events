@@ -700,6 +700,11 @@ export default function Home() {
             <p className="text-gray-400 mb-2">
               Creato con <span className="text-red-500">❤️</span> utilizzando le tecnologie che amo
             </p>
+            <p className="text-gray-500 text-sm">
+              <a href="/privacy" className="hover:text-gray-300 transition-colors">
+                Privacy Policy
+              </a>
+            </p>
           </div>
         </div>
       </footer>
