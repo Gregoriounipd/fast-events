@@ -128,21 +128,20 @@ export default function GalleryPage() {
   // Categorie
   const categories = ['Tutti', 'Lauree', 'Compleanni', 'Diciottesimi', 'Eventi Aziendali'];
 
-  // PLACEHOLDER: Sostituisci con le tue foto vere
-  // Struttura: { src: '/images/gallery/foto1.jpg', category: 'Lauree', title: 'Festa Laurea Marco' }
+  
   const galleryImages = [
-    { src: '/images/foto1_banner.jpg', category: 'Lauree', title: 'Festa di Laurea 2024' },
+    { src: '/images/foto1_banner.jpg', category: 'Lauree', title: 'Luarea di Edoardo e Giulia' },
     { src: '/images/foto2_banner.jpg', category: 'Compleanni', title: 'Compleanno 20 Anni' },
     { src: '/images/foto12_banner.jpg', category: 'Compleanni', title: 'Festa Halloween' },
-    { src: '/images/foto4_banner.jpg', category: 'Lauree', title: 'Festa Laurea Gruppo' },
+    { src: '/images/foto4_banner.jpg', category: 'Lauree', title: 'Laurea di Emanuele' },
     { src: '/images/foto10_banner.jpg', category: 'Compleanni', title: 'Festa in maschera' },
     { src: '/images/foto8_banner.jpg', category: 'Compleanni', title: 'Party 25 Anni' },
-    { src: '/images/foto6_banner.jpg', category: 'Diciottesimi', title: 'Festa Halloween 2025' },
+    { src: '/images/foto6_banner.jpg', category: 'Diciottesimi', title: 'Diciottesimo di Margherita' },
     { src: '/images/foto13_banner.jpg', category: 'Lauree', title: 'Laurea in Medicina' },
     { src: '/images/foto9_banner.jpg', category: 'Compleanni', title: 'Festa a Tema' },
   ];
 
-  // Filtra per categoria
+  // Filtr
   const filteredImages = selectedCategory === 'Tutti'
     ? galleryImages
     : galleryImages.filter(img => img.category === selectedCategory);
