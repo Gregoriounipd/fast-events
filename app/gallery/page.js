@@ -275,7 +275,7 @@ export default function GalleryPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center max-w-2xl mx-auto">
               <a
-                href="https://wa.me/3921209212?text=Ciao! Ho visto la vostra Gallery e vorrei organizzare un evento!"
+                href="https://wa.me/3272567518?text=Ciao! Ho visto la vostra Gallery e vorrei organizzare un evento!"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 sm:px-8 py-3 sm:py-4 bg-green-500 text-white font-semibold rounded-2xl hover:bg-green-600 hover:scale-105 transition-all duration-300 text-sm sm:text-base"

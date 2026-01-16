@@ -134,7 +134,7 @@ function ContactModal({ isOpen, onClose }) {
 
       console.log('💾 Backup errore salvato:', backupKey);
 
-      alert('⚠️ Possibile problema di invio.\n\nI tuoi dati sono stati salvati in backup.\n\nPer sicurezza, contattaci anche su WhatsApp: +39 3921209212');
+      alert('⚠️ Possibile problema di invio.\n\nI tuoi dati sono stati salvati in backup.\n\nPer sicurezza, contattaci anche su WhatsApp: +39 3272567518');
     }
   };
 
@@ -332,28 +332,28 @@ function Chatbot() {
             </p>
             <div className="space-y-2">
               <button
-                onClick={() => window.open('https://wa.me/3921209212?text=Ciao! Vorrei informazioni sui matrimoni e i vostri servizi.', '_blank')}
+                onClick={() => window.open('https://wa.me/3272567518?text=Ciao! Vorrei informazioni sui matrimoni e i vostri servizi.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-blue-50 rounded-lg hover:bg-blue-100 text-xs sm:text-sm transition-colors border border-blue-200"
               >
                 <span className="text-base sm:text-lg mr-2">💒</span>
                 <strong>Matrimoni</strong> - Info complete sui nostri servizi
               </button>
               <button
-                onClick={() => window.open('https://wa.me/3921209212?text=Ciao! Vorrei organizzare una festa di laurea.', '_blank')}
+                onClick={() => window.open('https://wa.me/3272567518?text=Ciao! Vorrei organizzare una festa di laurea.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-amber-50 rounded-lg hover:bg-amber-100 text-xs sm:text-sm transition-colors border border-amber-200"
               >
                 <span className="text-base sm:text-lg mr-2">🎓</span>
                 <strong>Feste di Laurea</strong> - Celebra il tuo successo
               </button>
               <button
-                onClick={() => window.open('https://wa.me/3921209212?text=Ciao! Vorrei organizzare un compleanno speciale.', '_blank')}
+                onClick={() => window.open('https://wa.me/3272567518?text=Ciao! Vorrei organizzare un compleanno speciale.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-amber-50 rounded-lg hover:bg-amber-100 text-xs sm:text-sm transition-colors border border-amber-200"
               >
                 <span className="text-base sm:text-lg mr-2">🎂</span>
                 <strong>Compleanni</strong> - Feste memorabili
               </button>
               <button
-                onClick={() => window.open('https://wa.me/3921209212?text=Ciao! Vorrei organizzare un evento aziendale.', '_blank')}
+                onClick={() => window.open('https://wa.me/3272567518?text=Ciao! Vorrei organizzare un evento aziendale.', '_blank')}
                 className="block w-full text-left p-2.5 sm:p-3 bg-slate-50 rounded-lg hover:bg-slate-100 text-xs sm:text-sm transition-colors border border-slate-200"
               >
                 <span className="text-base sm:text-lg mr-2">🏢</span>
@@ -382,7 +382,7 @@ export default function Home() {
 
   // Funzione WhatsApp
   const openWhatsApp = () => {
-    const phoneNumber = '3921209212';
+    const phoneNumber = '3272567518';
     const message = 'Ciao! Sono interessato ai vostri servizi per organizzazione eventi. Potreste darmi maggiori informazioni?';
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -416,11 +416,11 @@ export default function Home() {
                   Se hai inviato una richiesta tra il 23 novembre e il 3 dicembre e non hai ricevuto risposta,
                   <strong> per favore ricontattaci</strong> su WhatsApp:
                   <a
-                    href="https://wa.me/3921209212?text=Ciao! Ho inviato una richiesta nei giorni scorsi ma non ho ricevuto risposta"
+                    href="https://wa.me/3272567518?text=Ciao! Ho inviato una richiesta nei giorni scorsi ma non ho ricevuto risposta"
                     className="underline ml-1 hover:text-yellow-200"
                     target="_blank"
                   >
-                    +39 392 120 9212
+                    +39 327 256 7518 
                   </a>
                 </p>
               </div>
@@ -647,7 +647,7 @@ export default function Home() {
                   </div>
                   <div className="text-left">
                     <div className="text-xs sm:text-sm opacity-90">WhatsApp</div>
-                    <div className="font-bold text-sm sm:text-base">+39 392 120 9212</div>
+                    <div className="font-bold text-sm sm:text-base">+39 327 256 7518 </div>
                   </div>
                   <div className="ml-2 transform group-hover:scale-110 transition-transform duration-300 hidden sm:block">
                     <span className="text-xl">📱</span>

@@ -81,7 +81,7 @@ function QuickQuoteForm() {
         errore: error.message
       }));
 
-      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 3921209212');
+      alert('❌ Errore nell\'invio. Contattaci direttamente su WhatsApp: +39 327 256 7518');
     }
   };
 
@@ -379,7 +379,7 @@ export default function SalePage() {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-800">WhatsApp</div>
-                        <div className="text-gray-600">+39 392 1209 212</div>
+                        <div className="text-gray-600">+39 327 256 7518</div>
                       </div>
                     </div>
 
@@ -408,7 +408,7 @@ export default function SalePage() {
 
                 <div className="text-center">
                   <a
-                    href="https://wa.me/3921209212?text=Ciao! Vorrei informazioni sui vostri servizi."
+                    href="https://wa.me/327 256 7518?text=Ciao! Vorrei informazioni sui vostri servizi."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 bg-green-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-600 transition-all duration-300 hover:scale-105"

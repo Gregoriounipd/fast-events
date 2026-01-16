@@ -55,7 +55,7 @@ const PrivacyPolicy = () => {
               </div>
               <div className="flex items-center gap-2 text-gray-700">
                 <Phone size={18} className="flex-shrink-0" />
-                <span>[392 1209212]</span>
+                <span>[327 256 7518]</span>
               </div>
               <p className="text-gray-700">Partita IVA: [Inserire P.IVA]</p>
             </div>
@@ -223,7 +223,7 @@ const PrivacyPolicy = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={18} className="text-purple-600" />
-                <span>[392 1209212]</span>
+                <span>[327 2567518]</span>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin size={18} className="text-purple-600 mt-1" />
