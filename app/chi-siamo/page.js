@@ -347,7 +347,7 @@ export default function ChiSiamoPage() {
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center max-w-2xl mx-auto">
               {/* WhatsApp Button */}
               <a
-                href="https://wa.me/3921209212?text=Ciao! Vorrei sapere di più su Adori Events e organizzare un evento."
+                href="https://wa.me/3272567518?text=Ciao! Vorrei sapere di più su Adori Events e organizzare un evento."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-green-500 text-white font-semibold rounded-2xl transition-all duration-500 hover:bg-green-600 hover:scale-105 hover:shadow-2xl overflow-hidden"
