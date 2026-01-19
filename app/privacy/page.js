@@ -57,7 +57,7 @@ const PrivacyPolicy = () => {
                 <Phone size={18} className="flex-shrink-0" />
                 <span>[327 256 7518]</span>
               </div>
-              <p className="text-gray-700">Partita IVA: [Inserire P.IVA]</p>
+              <p className="text-gray-700">Partita IVA: [IT 05752550284]</p>
             </div>
           </Section>
 
