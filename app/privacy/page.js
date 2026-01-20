@@ -185,7 +185,7 @@ const PrivacyPolicy = () => {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-gray-700">Per esercitare i tuoi diritti, contattaci a: <span className="text-purple-600 font-semibold">[inserire email privacy]</span></p>
+            <p className="mt-4 text-gray-700">Per esercitare i tuoi diritti, contattaci a: <span className="text-purple-600 font-semibold">[Assistenza.privacy.adorievents@gmail.com]</span></p>
           </Section>
 
           {/* Garante */}
