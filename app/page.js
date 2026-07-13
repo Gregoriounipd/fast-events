@@ -654,9 +654,9 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="mb-4">© 2025 Greg - Web Developer. Tutti i diritti riservati.</p>
+            <p className="mb-4"> © 2025 Adori Events. Tutti i diritti riservati.</p>
             <p className="text-gray-400 mb-2">
-              Creato con <span className="text-red-500">❤️</span> utilizzando le tecnologie che amo
+               Web design & development © Greg. Creato utilizzando le tecnologie che amo
             </p>
             <p className="text-gray-500 text-sm mb-2">
               P. IVA IT 05752550284
